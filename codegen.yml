@@ -1,0 +1,12 @@
+overwrite: true
+schema: 
+  - https://cajoo-staging.hasura.app/v1/graphql:
+      headers:
+        x-hasura-admin-secret: 4XquvFhs13FYxpByTmH7XvtKV5KYw7iigROw6OWCJqzQnmoio07ZJ2W1o0hZeA4q
+documents: "src/**/*.graphql"
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
