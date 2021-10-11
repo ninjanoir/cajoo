@@ -4267,35 +4267,6 @@ export type Discounts_Variance_Order_By = {
   ttc_price?: Maybe<Order_By>;
 };
 
-/** columns and relationships of "feedback" */
-export type Feedback = {
-  __typename?: 'feedback';
-  id: Scalars['uuid'];
-  order_id: Scalars['uuid'];
-};
-
-/** aggregated selection of "feedback" */
-export type Feedback_Aggregate = {
-  __typename?: 'feedback_aggregate';
-  aggregate?: Maybe<Feedback_Aggregate_Fields>;
-  nodes: Array<Feedback>;
-};
-
-/** aggregate fields of "feedback" */
-export type Feedback_Aggregate_Fields = {
-  __typename?: 'feedback_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<Feedback_Max_Fields>;
-  min?: Maybe<Feedback_Min_Fields>;
-};
-
-
-/** aggregate fields of "feedback" */
-export type Feedback_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Feedback_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
 /** columns and relationships of "feedback_answer" */
 export type Feedback_Answer = {
   __typename?: 'feedback_answer';
@@ -4413,95 +4384,268 @@ export enum Feedback_Answer_Update_Column {
   Value = 'value'
 }
 
-/** Boolean expression to filter rows from the table "feedback". All fields are combined with a logical 'AND'. */
-export type Feedback_Bool_Exp = {
-  _and?: Maybe<Array<Feedback_Bool_Exp>>;
-  _not?: Maybe<Feedback_Bool_Exp>;
-  _or?: Maybe<Array<Feedback_Bool_Exp>>;
-  id?: Maybe<Uuid_Comparison_Exp>;
-  order_id?: Maybe<Uuid_Comparison_Exp>;
+/** columns and relationships of "feedback_info" */
+export type Feedback_Info = {
+  __typename?: 'feedback_info';
+  comment?: Maybe<Scalars['String']>;
+  created_at: Scalars['timestamptz'];
+  feedback_id: Scalars['uuid'];
+  id: Scalars['uuid'];
+  reason?: Maybe<Feedback_Reasons_Enum>;
 };
 
-/** unique or primary key constraints on table "feedback" */
-export enum Feedback_Constraint {
+/** aggregated selection of "feedback_info" */
+export type Feedback_Info_Aggregate = {
+  __typename?: 'feedback_info_aggregate';
+  aggregate?: Maybe<Feedback_Info_Aggregate_Fields>;
+  nodes: Array<Feedback_Info>;
+};
+
+/** aggregate fields of "feedback_info" */
+export type Feedback_Info_Aggregate_Fields = {
+  __typename?: 'feedback_info_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Feedback_Info_Max_Fields>;
+  min?: Maybe<Feedback_Info_Min_Fields>;
+};
+
+
+/** aggregate fields of "feedback_info" */
+export type Feedback_Info_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Feedback_Info_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "feedback_info". All fields are combined with a logical 'AND'. */
+export type Feedback_Info_Bool_Exp = {
+  _and?: Maybe<Array<Feedback_Info_Bool_Exp>>;
+  _not?: Maybe<Feedback_Info_Bool_Exp>;
+  _or?: Maybe<Array<Feedback_Info_Bool_Exp>>;
+  comment?: Maybe<String_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  feedback_id?: Maybe<Uuid_Comparison_Exp>;
+  id?: Maybe<Uuid_Comparison_Exp>;
+  reason?: Maybe<Feedback_Reasons_Enum_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "feedback_info" */
+export enum Feedback_Info_Constraint {
   /** unique or primary key constraint */
-  FeedbackPkey = 'feedback_pkey'
+  FeedbackInfoPkey = 'feedback_info_pkey'
 }
 
-/** input type for inserting data into table "feedback" */
-export type Feedback_Insert_Input = {
+/** input type for inserting data into table "feedback_info" */
+export type Feedback_Info_Insert_Input = {
+  comment?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  feedback_id?: Maybe<Scalars['uuid']>;
   id?: Maybe<Scalars['uuid']>;
-  order_id?: Maybe<Scalars['uuid']>;
+  reason?: Maybe<Feedback_Reasons_Enum>;
 };
 
 /** aggregate max on columns */
-export type Feedback_Max_Fields = {
-  __typename?: 'feedback_max_fields';
+export type Feedback_Info_Max_Fields = {
+  __typename?: 'feedback_info_max_fields';
+  comment?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  feedback_id?: Maybe<Scalars['uuid']>;
   id?: Maybe<Scalars['uuid']>;
-  order_id?: Maybe<Scalars['uuid']>;
 };
 
 /** aggregate min on columns */
-export type Feedback_Min_Fields = {
-  __typename?: 'feedback_min_fields';
+export type Feedback_Info_Min_Fields = {
+  __typename?: 'feedback_info_min_fields';
+  comment?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  feedback_id?: Maybe<Scalars['uuid']>;
   id?: Maybe<Scalars['uuid']>;
-  order_id?: Maybe<Scalars['uuid']>;
 };
 
-/** response of any mutation on the table "feedback" */
-export type Feedback_Mutation_Response = {
-  __typename?: 'feedback_mutation_response';
+/** response of any mutation on the table "feedback_info" */
+export type Feedback_Info_Mutation_Response = {
+  __typename?: 'feedback_info_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
-  returning: Array<Feedback>;
+  returning: Array<Feedback_Info>;
 };
 
-/** input type for inserting object relation for remote table "feedback" */
-export type Feedback_Obj_Rel_Insert_Input = {
-  data: Feedback_Insert_Input;
-  /** on conflict condition */
-  on_conflict?: Maybe<Feedback_On_Conflict>;
+/** on conflict condition type for table "feedback_info" */
+export type Feedback_Info_On_Conflict = {
+  constraint: Feedback_Info_Constraint;
+  update_columns?: Array<Feedback_Info_Update_Column>;
+  where?: Maybe<Feedback_Info_Bool_Exp>;
 };
 
-/** on conflict condition type for table "feedback" */
-export type Feedback_On_Conflict = {
-  constraint: Feedback_Constraint;
-  update_columns?: Array<Feedback_Update_Column>;
-  where?: Maybe<Feedback_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "feedback". */
-export type Feedback_Order_By = {
+/** Ordering options when selecting data from "feedback_info". */
+export type Feedback_Info_Order_By = {
+  comment?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  feedback_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  order_id?: Maybe<Order_By>;
+  reason?: Maybe<Order_By>;
 };
 
-/** primary key columns input for table: feedback */
-export type Feedback_Pk_Columns_Input = {
+/** primary key columns input for table: feedback_info */
+export type Feedback_Info_Pk_Columns_Input = {
   id: Scalars['uuid'];
 };
 
-/** select columns of table "feedback" */
-export enum Feedback_Select_Column {
+/** select columns of table "feedback_info" */
+export enum Feedback_Info_Select_Column {
+  /** column name */
+  Comment = 'comment',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  FeedbackId = 'feedback_id',
   /** column name */
   Id = 'id',
   /** column name */
-  OrderId = 'order_id'
+  Reason = 'reason'
 }
 
-/** input type for updating data in table "feedback" */
-export type Feedback_Set_Input = {
+/** input type for updating data in table "feedback_info" */
+export type Feedback_Info_Set_Input = {
+  comment?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  feedback_id?: Maybe<Scalars['uuid']>;
   id?: Maybe<Scalars['uuid']>;
-  order_id?: Maybe<Scalars['uuid']>;
+  reason?: Maybe<Feedback_Reasons_Enum>;
 };
 
-/** update columns of table "feedback" */
-export enum Feedback_Update_Column {
+/** update columns of table "feedback_info" */
+export enum Feedback_Info_Update_Column {
+  /** column name */
+  Comment = 'comment',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  FeedbackId = 'feedback_id',
   /** column name */
   Id = 'id',
   /** column name */
-  OrderId = 'order_id'
+  Reason = 'reason'
+}
+
+/** columns and relationships of "feedback_reasons" */
+export type Feedback_Reasons = {
+  __typename?: 'feedback_reasons';
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "feedback_reasons" */
+export type Feedback_Reasons_Aggregate = {
+  __typename?: 'feedback_reasons_aggregate';
+  aggregate?: Maybe<Feedback_Reasons_Aggregate_Fields>;
+  nodes: Array<Feedback_Reasons>;
+};
+
+/** aggregate fields of "feedback_reasons" */
+export type Feedback_Reasons_Aggregate_Fields = {
+  __typename?: 'feedback_reasons_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Feedback_Reasons_Max_Fields>;
+  min?: Maybe<Feedback_Reasons_Min_Fields>;
+};
+
+
+/** aggregate fields of "feedback_reasons" */
+export type Feedback_Reasons_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Feedback_Reasons_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "feedback_reasons". All fields are combined with a logical 'AND'. */
+export type Feedback_Reasons_Bool_Exp = {
+  _and?: Maybe<Array<Feedback_Reasons_Bool_Exp>>;
+  _not?: Maybe<Feedback_Reasons_Bool_Exp>;
+  _or?: Maybe<Array<Feedback_Reasons_Bool_Exp>>;
+  value?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "feedback_reasons" */
+export enum Feedback_Reasons_Constraint {
+  /** unique or primary key constraint */
+  FeedbackReasonsPkey = 'feedback_reasons_pkey'
+}
+
+export enum Feedback_Reasons_Enum {
+  App = 'app',
+  Delivery = 'delivery',
+  MissingProduct = 'missing_product',
+  Other = 'other',
+  Price = 'price',
+  SploitProduct = 'sploit_product'
+}
+
+/** Boolean expression to compare columns of type "feedback_reasons_enum". All fields are combined with logical 'AND'. */
+export type Feedback_Reasons_Enum_Comparison_Exp = {
+  _eq?: Maybe<Feedback_Reasons_Enum>;
+  _in?: Maybe<Array<Feedback_Reasons_Enum>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _neq?: Maybe<Feedback_Reasons_Enum>;
+  _nin?: Maybe<Array<Feedback_Reasons_Enum>>;
+};
+
+/** input type for inserting data into table "feedback_reasons" */
+export type Feedback_Reasons_Insert_Input = {
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Feedback_Reasons_Max_Fields = {
+  __typename?: 'feedback_reasons_max_fields';
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Feedback_Reasons_Min_Fields = {
+  __typename?: 'feedback_reasons_min_fields';
+  value?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "feedback_reasons" */
+export type Feedback_Reasons_Mutation_Response = {
+  __typename?: 'feedback_reasons_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Feedback_Reasons>;
+};
+
+/** on conflict condition type for table "feedback_reasons" */
+export type Feedback_Reasons_On_Conflict = {
+  constraint: Feedback_Reasons_Constraint;
+  update_columns?: Array<Feedback_Reasons_Update_Column>;
+  where?: Maybe<Feedback_Reasons_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "feedback_reasons". */
+export type Feedback_Reasons_Order_By = {
+  value?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: feedback_reasons */
+export type Feedback_Reasons_Pk_Columns_Input = {
+  value: Scalars['String'];
+};
+
+/** select columns of table "feedback_reasons" */
+export enum Feedback_Reasons_Select_Column {
+  /** column name */
+  Value = 'value'
+}
+
+/** input type for updating data in table "feedback_reasons" */
+export type Feedback_Reasons_Set_Input = {
+  value?: Maybe<Scalars['String']>;
+};
+
+/** update columns of table "feedback_reasons" */
+export enum Feedback_Reasons_Update_Column {
+  /** column name */
+  Value = 'value'
 }
 
 /** Boolean expression to compare columns of type "float8". All fields are combined with logical 'AND'. */
@@ -6647,14 +6791,18 @@ export type Mutation_Root = {
   delete_discounts?: Maybe<Discounts_Mutation_Response>;
   /** delete single row from the table: "discounts" */
   delete_discounts_by_pk?: Maybe<Discounts>;
-  /** delete data from the table: "feedback" */
-  delete_feedback?: Maybe<Feedback_Mutation_Response>;
   /** delete data from the table: "feedback_answer" */
   delete_feedback_answer?: Maybe<Feedback_Answer_Mutation_Response>;
   /** delete single row from the table: "feedback_answer" */
   delete_feedback_answer_by_pk?: Maybe<Feedback_Answer>;
-  /** delete single row from the table: "feedback" */
-  delete_feedback_by_pk?: Maybe<Feedback>;
+  /** delete data from the table: "feedback_info" */
+  delete_feedback_info?: Maybe<Feedback_Info_Mutation_Response>;
+  /** delete single row from the table: "feedback_info" */
+  delete_feedback_info_by_pk?: Maybe<Feedback_Info>;
+  /** delete data from the table: "feedback_reasons" */
+  delete_feedback_reasons?: Maybe<Feedback_Reasons_Mutation_Response>;
+  /** delete single row from the table: "feedback_reasons" */
+  delete_feedback_reasons_by_pk?: Maybe<Feedback_Reasons>;
   /** delete data from the table: "gift_rules" */
   delete_gift_rules?: Maybe<Gift_Rules_Mutation_Response>;
   /** delete single row from the table: "gift_rules" */
@@ -6915,14 +7063,18 @@ export type Mutation_Root = {
   insert_discounts?: Maybe<Discounts_Mutation_Response>;
   /** insert a single row into the table: "discounts" */
   insert_discounts_one?: Maybe<Discounts>;
-  /** insert data into the table: "feedback" */
-  insert_feedback?: Maybe<Feedback_Mutation_Response>;
   /** insert data into the table: "feedback_answer" */
   insert_feedback_answer?: Maybe<Feedback_Answer_Mutation_Response>;
   /** insert a single row into the table: "feedback_answer" */
   insert_feedback_answer_one?: Maybe<Feedback_Answer>;
-  /** insert a single row into the table: "feedback" */
-  insert_feedback_one?: Maybe<Feedback>;
+  /** insert data into the table: "feedback_info" */
+  insert_feedback_info?: Maybe<Feedback_Info_Mutation_Response>;
+  /** insert a single row into the table: "feedback_info" */
+  insert_feedback_info_one?: Maybe<Feedback_Info>;
+  /** insert data into the table: "feedback_reasons" */
+  insert_feedback_reasons?: Maybe<Feedback_Reasons_Mutation_Response>;
+  /** insert a single row into the table: "feedback_reasons" */
+  insert_feedback_reasons_one?: Maybe<Feedback_Reasons>;
   /** insert data into the table: "gift_rules" */
   insert_gift_rules?: Maybe<Gift_Rules_Mutation_Response>;
   /** insert data into the table: "gift_rules_category" */
@@ -7197,14 +7349,18 @@ export type Mutation_Root = {
   update_discounts?: Maybe<Discounts_Mutation_Response>;
   /** update single row of the table: "discounts" */
   update_discounts_by_pk?: Maybe<Discounts>;
-  /** update data of the table: "feedback" */
-  update_feedback?: Maybe<Feedback_Mutation_Response>;
   /** update data of the table: "feedback_answer" */
   update_feedback_answer?: Maybe<Feedback_Answer_Mutation_Response>;
   /** update single row of the table: "feedback_answer" */
   update_feedback_answer_by_pk?: Maybe<Feedback_Answer>;
-  /** update single row of the table: "feedback" */
-  update_feedback_by_pk?: Maybe<Feedback>;
+  /** update data of the table: "feedback_info" */
+  update_feedback_info?: Maybe<Feedback_Info_Mutation_Response>;
+  /** update single row of the table: "feedback_info" */
+  update_feedback_info_by_pk?: Maybe<Feedback_Info>;
+  /** update data of the table: "feedback_reasons" */
+  update_feedback_reasons?: Maybe<Feedback_Reasons_Mutation_Response>;
+  /** update single row of the table: "feedback_reasons" */
+  update_feedback_reasons_by_pk?: Maybe<Feedback_Reasons>;
   /** update data of the table: "gift_rules" */
   update_gift_rules?: Maybe<Gift_Rules_Mutation_Response>;
   /** update single row of the table: "gift_rules" */
@@ -7682,12 +7838,6 @@ export type Mutation_RootDelete_Discounts_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootDelete_FeedbackArgs = {
-  where: Feedback_Bool_Exp;
-};
-
-
-/** mutation root */
 export type Mutation_RootDelete_Feedback_AnswerArgs = {
   where: Feedback_Answer_Bool_Exp;
 };
@@ -7700,8 +7850,26 @@ export type Mutation_RootDelete_Feedback_Answer_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootDelete_Feedback_By_PkArgs = {
+export type Mutation_RootDelete_Feedback_InfoArgs = {
+  where: Feedback_Info_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Feedback_Info_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Feedback_ReasonsArgs = {
+  where: Feedback_Reasons_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Feedback_Reasons_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 
@@ -8544,13 +8712,6 @@ export type Mutation_RootInsert_Discounts_OneArgs = {
 
 
 /** mutation root */
-export type Mutation_RootInsert_FeedbackArgs = {
-  objects: Array<Feedback_Insert_Input>;
-  on_conflict?: Maybe<Feedback_On_Conflict>;
-};
-
-
-/** mutation root */
 export type Mutation_RootInsert_Feedback_AnswerArgs = {
   objects: Array<Feedback_Answer_Insert_Input>;
   on_conflict?: Maybe<Feedback_Answer_On_Conflict>;
@@ -8565,9 +8726,30 @@ export type Mutation_RootInsert_Feedback_Answer_OneArgs = {
 
 
 /** mutation root */
-export type Mutation_RootInsert_Feedback_OneArgs = {
-  object: Feedback_Insert_Input;
-  on_conflict?: Maybe<Feedback_On_Conflict>;
+export type Mutation_RootInsert_Feedback_InfoArgs = {
+  objects: Array<Feedback_Info_Insert_Input>;
+  on_conflict?: Maybe<Feedback_Info_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Feedback_Info_OneArgs = {
+  object: Feedback_Info_Insert_Input;
+  on_conflict?: Maybe<Feedback_Info_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Feedback_ReasonsArgs = {
+  objects: Array<Feedback_Reasons_Insert_Input>;
+  on_conflict?: Maybe<Feedback_Reasons_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Feedback_Reasons_OneArgs = {
+  object: Feedback_Reasons_Insert_Input;
+  on_conflict?: Maybe<Feedback_Reasons_On_Conflict>;
 };
 
 
@@ -9595,13 +9777,6 @@ export type Mutation_RootUpdate_Discounts_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootUpdate_FeedbackArgs = {
-  _set?: Maybe<Feedback_Set_Input>;
-  where: Feedback_Bool_Exp;
-};
-
-
-/** mutation root */
 export type Mutation_RootUpdate_Feedback_AnswerArgs = {
   _set?: Maybe<Feedback_Answer_Set_Input>;
   where: Feedback_Answer_Bool_Exp;
@@ -9616,9 +9791,30 @@ export type Mutation_RootUpdate_Feedback_Answer_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Feedback_By_PkArgs = {
-  _set?: Maybe<Feedback_Set_Input>;
-  pk_columns: Feedback_Pk_Columns_Input;
+export type Mutation_RootUpdate_Feedback_InfoArgs = {
+  _set?: Maybe<Feedback_Info_Set_Input>;
+  where: Feedback_Info_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Feedback_Info_By_PkArgs = {
+  _set?: Maybe<Feedback_Info_Set_Input>;
+  pk_columns: Feedback_Info_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Feedback_ReasonsArgs = {
+  _set?: Maybe<Feedback_Reasons_Set_Input>;
+  where: Feedback_Reasons_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Feedback_Reasons_By_PkArgs = {
+  _set?: Maybe<Feedback_Reasons_Set_Input>;
+  pk_columns: Feedback_Reasons_Pk_Columns_Input;
 };
 
 
@@ -10399,7 +10595,8 @@ export enum Operation_Rule_Handle_Constraint {
 export enum Operation_Rule_Handle_Enum {
   CoursierfrLoadBalancing = 'coursierfr_load_balancing',
   IsExperiencingDelays = 'is_experiencing_delays',
-  StuartLoadBalancing = 'stuart_load_balancing'
+  StuartLoadBalancing = 'stuart_load_balancing',
+  Tms = 'tms'
 }
 
 /** Boolean expression to compare columns of type "operation_rule_handle_enum". All fields are combined with logical 'AND'. */
@@ -11204,8 +11401,6 @@ export type Orders = {
   /** A computed field, executes function "delivery_time_seconds" */
   delivery_time_seconds?: Maybe<Scalars['float8']>;
   discount_applied?: Maybe<Scalars['numeric']>;
-  /** An object relationship */
-  feedback?: Maybe<Feedback>;
   feedback_id?: Maybe<Scalars['uuid']>;
   has_given_feedback: Scalars['Boolean'];
   id: Scalars['uuid'];
@@ -11404,7 +11599,6 @@ export type Orders_Bool_Exp = {
   delivery_stop_id?: Maybe<String_Comparison_Exp>;
   delivery_time_seconds?: Maybe<Float8_Comparison_Exp>;
   discount_applied?: Maybe<Numeric_Comparison_Exp>;
-  feedback?: Maybe<Feedback_Bool_Exp>;
   feedback_id?: Maybe<Uuid_Comparison_Exp>;
   has_given_feedback?: Maybe<Boolean_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
@@ -11490,7 +11684,6 @@ export type Orders_Insert_Input = {
   delivery_status?: Maybe<Delivery_Status_Enum>;
   delivery_stop_id?: Maybe<Scalars['String']>;
   discount_applied?: Maybe<Scalars['numeric']>;
-  feedback?: Maybe<Feedback_Obj_Rel_Insert_Input>;
   feedback_id?: Maybe<Scalars['uuid']>;
   has_given_feedback?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['uuid']>;
@@ -11740,7 +11933,6 @@ export type Orders_Order_By = {
   delivery_stop_id?: Maybe<Order_By>;
   delivery_time_seconds?: Maybe<Order_By>;
   discount_applied?: Maybe<Order_By>;
-  feedback?: Maybe<Feedback_Order_By>;
   feedback_id?: Maybe<Order_By>;
   has_given_feedback?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
@@ -14021,18 +14213,24 @@ export type Query_Root = {
   discounts_aggregate: Discounts_Aggregate;
   /** fetch data from the table: "discounts" using primary key columns */
   discounts_by_pk?: Maybe<Discounts>;
-  /** fetch data from the table: "feedback" */
-  feedback: Array<Feedback>;
-  /** fetch aggregated fields from the table: "feedback" */
-  feedback_aggregate: Feedback_Aggregate;
   /** fetch data from the table: "feedback_answer" */
   feedback_answer: Array<Feedback_Answer>;
   /** fetch aggregated fields from the table: "feedback_answer" */
   feedback_answer_aggregate: Feedback_Answer_Aggregate;
   /** fetch data from the table: "feedback_answer" using primary key columns */
   feedback_answer_by_pk?: Maybe<Feedback_Answer>;
-  /** fetch data from the table: "feedback" using primary key columns */
-  feedback_by_pk?: Maybe<Feedback>;
+  /** fetch data from the table: "feedback_info" */
+  feedback_info: Array<Feedback_Info>;
+  /** fetch aggregated fields from the table: "feedback_info" */
+  feedback_info_aggregate: Feedback_Info_Aggregate;
+  /** fetch data from the table: "feedback_info" using primary key columns */
+  feedback_info_by_pk?: Maybe<Feedback_Info>;
+  /** fetch data from the table: "feedback_reasons" */
+  feedback_reasons: Array<Feedback_Reasons>;
+  /** fetch aggregated fields from the table: "feedback_reasons" */
+  feedback_reasons_aggregate: Feedback_Reasons_Aggregate;
+  /** fetch data from the table: "feedback_reasons" using primary key columns */
+  feedback_reasons_by_pk?: Maybe<Feedback_Reasons>;
   getUserWarehouseDeliveryETA?: Maybe<DeliveryEtaOutput>;
   /** fetch data from the table: "gift_rules" */
   gift_rules: Array<Gift_Rules>;
@@ -14737,24 +14935,6 @@ export type Query_RootDiscounts_By_PkArgs = {
 };
 
 
-export type Query_RootFeedbackArgs = {
-  distinct_on?: Maybe<Array<Feedback_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Feedback_Order_By>>;
-  where?: Maybe<Feedback_Bool_Exp>;
-};
-
-
-export type Query_RootFeedback_AggregateArgs = {
-  distinct_on?: Maybe<Array<Feedback_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Feedback_Order_By>>;
-  where?: Maybe<Feedback_Bool_Exp>;
-};
-
-
 export type Query_RootFeedback_AnswerArgs = {
   distinct_on?: Maybe<Array<Feedback_Answer_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -14778,8 +14958,49 @@ export type Query_RootFeedback_Answer_By_PkArgs = {
 };
 
 
-export type Query_RootFeedback_By_PkArgs = {
+export type Query_RootFeedback_InfoArgs = {
+  distinct_on?: Maybe<Array<Feedback_Info_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Feedback_Info_Order_By>>;
+  where?: Maybe<Feedback_Info_Bool_Exp>;
+};
+
+
+export type Query_RootFeedback_Info_AggregateArgs = {
+  distinct_on?: Maybe<Array<Feedback_Info_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Feedback_Info_Order_By>>;
+  where?: Maybe<Feedback_Info_Bool_Exp>;
+};
+
+
+export type Query_RootFeedback_Info_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+export type Query_RootFeedback_ReasonsArgs = {
+  distinct_on?: Maybe<Array<Feedback_Reasons_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Feedback_Reasons_Order_By>>;
+  where?: Maybe<Feedback_Reasons_Bool_Exp>;
+};
+
+
+export type Query_RootFeedback_Reasons_AggregateArgs = {
+  distinct_on?: Maybe<Array<Feedback_Reasons_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Feedback_Reasons_Order_By>>;
+  where?: Maybe<Feedback_Reasons_Bool_Exp>;
+};
+
+
+export type Query_RootFeedback_Reasons_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 
@@ -18421,18 +18642,24 @@ export type Subscription_Root = {
   discounts_aggregate: Discounts_Aggregate;
   /** fetch data from the table: "discounts" using primary key columns */
   discounts_by_pk?: Maybe<Discounts>;
-  /** fetch data from the table: "feedback" */
-  feedback: Array<Feedback>;
-  /** fetch aggregated fields from the table: "feedback" */
-  feedback_aggregate: Feedback_Aggregate;
   /** fetch data from the table: "feedback_answer" */
   feedback_answer: Array<Feedback_Answer>;
   /** fetch aggregated fields from the table: "feedback_answer" */
   feedback_answer_aggregate: Feedback_Answer_Aggregate;
   /** fetch data from the table: "feedback_answer" using primary key columns */
   feedback_answer_by_pk?: Maybe<Feedback_Answer>;
-  /** fetch data from the table: "feedback" using primary key columns */
-  feedback_by_pk?: Maybe<Feedback>;
+  /** fetch data from the table: "feedback_info" */
+  feedback_info: Array<Feedback_Info>;
+  /** fetch aggregated fields from the table: "feedback_info" */
+  feedback_info_aggregate: Feedback_Info_Aggregate;
+  /** fetch data from the table: "feedback_info" using primary key columns */
+  feedback_info_by_pk?: Maybe<Feedback_Info>;
+  /** fetch data from the table: "feedback_reasons" */
+  feedback_reasons: Array<Feedback_Reasons>;
+  /** fetch aggregated fields from the table: "feedback_reasons" */
+  feedback_reasons_aggregate: Feedback_Reasons_Aggregate;
+  /** fetch data from the table: "feedback_reasons" using primary key columns */
+  feedback_reasons_by_pk?: Maybe<Feedback_Reasons>;
   /** fetch data from the table: "gift_rules" */
   gift_rules: Array<Gift_Rules>;
   /** fetch aggregated fields from the table: "gift_rules" */
@@ -19135,24 +19362,6 @@ export type Subscription_RootDiscounts_By_PkArgs = {
 };
 
 
-export type Subscription_RootFeedbackArgs = {
-  distinct_on?: Maybe<Array<Feedback_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Feedback_Order_By>>;
-  where?: Maybe<Feedback_Bool_Exp>;
-};
-
-
-export type Subscription_RootFeedback_AggregateArgs = {
-  distinct_on?: Maybe<Array<Feedback_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Feedback_Order_By>>;
-  where?: Maybe<Feedback_Bool_Exp>;
-};
-
-
 export type Subscription_RootFeedback_AnswerArgs = {
   distinct_on?: Maybe<Array<Feedback_Answer_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -19176,8 +19385,49 @@ export type Subscription_RootFeedback_Answer_By_PkArgs = {
 };
 
 
-export type Subscription_RootFeedback_By_PkArgs = {
+export type Subscription_RootFeedback_InfoArgs = {
+  distinct_on?: Maybe<Array<Feedback_Info_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Feedback_Info_Order_By>>;
+  where?: Maybe<Feedback_Info_Bool_Exp>;
+};
+
+
+export type Subscription_RootFeedback_Info_AggregateArgs = {
+  distinct_on?: Maybe<Array<Feedback_Info_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Feedback_Info_Order_By>>;
+  where?: Maybe<Feedback_Info_Bool_Exp>;
+};
+
+
+export type Subscription_RootFeedback_Info_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootFeedback_ReasonsArgs = {
+  distinct_on?: Maybe<Array<Feedback_Reasons_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Feedback_Reasons_Order_By>>;
+  where?: Maybe<Feedback_Reasons_Bool_Exp>;
+};
+
+
+export type Subscription_RootFeedback_Reasons_AggregateArgs = {
+  distinct_on?: Maybe<Array<Feedback_Reasons_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Feedback_Reasons_Order_By>>;
+  where?: Maybe<Feedback_Reasons_Bool_Exp>;
+};
+
+
+export type Subscription_RootFeedback_Reasons_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 
@@ -24556,49 +24806,56 @@ export type Warehouses_Variance_Fields = {
   min_basket_value?: Maybe<Scalars['Float']>;
 };
 
-export type GetUsersQueryVariables = Exact<{
-  limit: Scalars['Int'];
+export type GetUserWithOrdersQueryVariables = Exact<{
+  id: Scalars['uuid'];
 }>;
 
 
-export type GetUsersQuery = { __typename?: 'query_root', users: Array<{ __typename?: 'users', id: any, email?: string | null | undefined, first_name?: string | null | undefined, last_name?: string | null | undefined }> };
+export type GetUserWithOrdersQuery = { __typename?: 'query_root', users_by_pk?: { __typename?: 'users', first_name?: string | null | undefined, last_name?: string | null | undefined, orders: Array<{ __typename?: 'orders', paid_at?: any | null | undefined, order_items: Array<{ __typename?: 'order_items', ttc_price: any, product: { __typename?: 'products', name: string } }> }> } | null | undefined };
 
 
-export const GetUsersDocument = gql`
-    query GetUsers($limit: Int!) {
-  users(limit: $limit) {
-    id
-    email
+export const GetUserWithOrdersDocument = gql`
+    query GetUserWithOrders($id: uuid!) {
+  users_by_pk(id: $id) {
     first_name
     last_name
+    orders {
+      paid_at
+      order_items {
+        ttc_price
+        product {
+          name
+        }
+      }
+    }
   }
 }
     `;
 
 /**
- * __useGetUsersQuery__
+ * __useGetUserWithOrdersQuery__
  *
- * To run a query within a React component, call `useGetUsersQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetUserWithOrdersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserWithOrdersQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetUsersQuery({
+ * const { data, loading, error } = useGetUserWithOrdersQuery({
  *   variables: {
- *      limit: // value for 'limit'
+ *      id: // value for 'id'
  *   },
  * });
  */
-export function useGetUsersQuery(baseOptions: Apollo.QueryHookOptions<GetUsersQuery, GetUsersQueryVariables>) {
+export function useGetUserWithOrdersQuery(baseOptions: Apollo.QueryHookOptions<GetUserWithOrdersQuery, GetUserWithOrdersQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, options);
+        return Apollo.useQuery<GetUserWithOrdersQuery, GetUserWithOrdersQueryVariables>(GetUserWithOrdersDocument, options);
       }
-export function useGetUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUsersQuery, GetUsersQueryVariables>) {
+export function useGetUserWithOrdersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserWithOrdersQuery, GetUserWithOrdersQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, options);
+          return Apollo.useLazyQuery<GetUserWithOrdersQuery, GetUserWithOrdersQueryVariables>(GetUserWithOrdersDocument, options);
         }
-export type GetUsersQueryHookResult = ReturnType<typeof useGetUsersQuery>;
-export type GetUsersLazyQueryHookResult = ReturnType<typeof useGetUsersLazyQuery>;
-export type GetUsersQueryResult = Apollo.QueryResult<GetUsersQuery, GetUsersQueryVariables>;
+export type GetUserWithOrdersQueryHookResult = ReturnType<typeof useGetUserWithOrdersQuery>;
+export type GetUserWithOrdersLazyQueryHookResult = ReturnType<typeof useGetUserWithOrdersLazyQuery>;
+export type GetUserWithOrdersQueryResult = Apollo.QueryResult<GetUserWithOrdersQuery, GetUserWithOrdersQueryVariables>;

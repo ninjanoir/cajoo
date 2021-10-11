@@ -1,8 +1,0 @@
-query GetUsers($limit: Int!) {
-  users(limit: $limit) {
-    id
-    email
-    first_name
-    last_name
-  }
-}

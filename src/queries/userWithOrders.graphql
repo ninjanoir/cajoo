@@ -1,0 +1,15 @@
+query GetUserWithOrders($id: uuid!) {
+  users_by_pk(id: $id) {
+    first_name
+    last_name
+    orders {
+      paid_at
+      order_items {
+        ttc_price
+        product {
+          name
+        }
+      }
+    }
+  }
+}

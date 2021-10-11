@@ -10,19 +10,33 @@ We've gone ahead and created a boilerplate that represents part of the technical
 - An Apollo client configured with credentials to connect to a staging environment with mock data
 - Some GraphQL queries to fetch data and examples of how it can be used
 
-## Context
-
 ## Challenge
 
-_Display summary information for a customer as if you were a member of the customer service team_
+You have been provided access to a staging environment with mock data about a very special customer.
 
-#### Your challenge is to clone this repository and create a small web application to visualize the users information, so that looking at it is valuable to a member of the customer service team
+_Display summary information for this customer as if you were a member of the customer service team_
 
-How you do that is up to you - feel free to make up your own mind and get challenged by the interviewer before starting to write any code.
+You should at least display the following:
+
+- The total # of orders made by this customer
+- The total amount spent by this customer
+- The AOV (average order value) for this customer
+- The list of the last orders with:
+  - order number
+  - delivery address
+  - total_basket
+  - amount_paid
+  - total_refunds
+  - voucher used
+
+**⭐️ Bonus**: Dig out the data model and display additional information about the user that you may find interesting.
+
+### ❓ Feel free to ask the interviewer about the meaning of the different tables
 
 ## Deliverables
 
-- Put your code on Github and send us the link to the repository
+- We will do a voice over your code at the end of the interview
+- Put your code on a private Github repository and invite us over so we can have another look afterwards
 
 ## Usage
 
@@ -38,4 +52,10 @@ b. Run the application (will start on port `3000`)
 
 ```bash
 yarn start
+```
+
+c. Generate the types for your queries or mutations
+
+```bash
+yarn graphql:codegen
 ```
