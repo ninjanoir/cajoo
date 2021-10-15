@@ -18,6 +18,7 @@ export type Scalars = {
   geometry: any;
   jsonb: any;
   numeric: any;
+  timestamp: any;
   timestamptz: any;
   uuid: any;
 };
@@ -84,6 +85,12 @@ export type CreateStaffUserOutput = {
 export type CreateStuartDeliveryOutput = {
   __typename?: 'CreateStuartDeliveryOutput';
   message: Scalars['String'];
+};
+
+export type CreateUberDirectDeliveryOutput = {
+  __typename?: 'CreateUberDirectDeliveryOutput';
+  message: Scalars['String'];
+  order_id?: Maybe<Scalars['String']>;
 };
 
 export type DeleteUserOutput = {
@@ -1631,7 +1638,7 @@ export type Coupons = {
   /** An aggregate relationship */
   orders_aggregate: Orders_Aggregate;
   recipient_id?: Maybe<Scalars['uuid']>;
-  remaining_count: Scalars['numeric'];
+  remaining_count?: Maybe<Scalars['numeric']>;
   tag?: Maybe<Coupon_Tag_Enum>;
   type: Discount_Type_Enum;
   updated_at: Scalars['timestamptz'];
@@ -2886,446 +2893,14 @@ export type Deliveries_Variance_Order_By = {
   number?: Maybe<Order_By>;
 };
 
-/** columns and relationships of "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons = {
-  __typename?: 'delivery_feedback_reasons';
-  comment?: Maybe<Scalars['String']>;
-  feedback_id: Scalars['Int'];
-  id: Scalars['Int'];
-  type: Delivery_Feedback_Reasons_Type_Enum;
-};
-
-/** aggregated selection of "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Aggregate = {
-  __typename?: 'delivery_feedback_reasons_aggregate';
-  aggregate?: Maybe<Delivery_Feedback_Reasons_Aggregate_Fields>;
-  nodes: Array<Delivery_Feedback_Reasons>;
-};
-
-/** aggregate fields of "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Aggregate_Fields = {
-  __typename?: 'delivery_feedback_reasons_aggregate_fields';
-  avg?: Maybe<Delivery_Feedback_Reasons_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Delivery_Feedback_Reasons_Max_Fields>;
-  min?: Maybe<Delivery_Feedback_Reasons_Min_Fields>;
-  stddev?: Maybe<Delivery_Feedback_Reasons_Stddev_Fields>;
-  stddev_pop?: Maybe<Delivery_Feedback_Reasons_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Delivery_Feedback_Reasons_Stddev_Samp_Fields>;
-  sum?: Maybe<Delivery_Feedback_Reasons_Sum_Fields>;
-  var_pop?: Maybe<Delivery_Feedback_Reasons_Var_Pop_Fields>;
-  var_samp?: Maybe<Delivery_Feedback_Reasons_Var_Samp_Fields>;
-  variance?: Maybe<Delivery_Feedback_Reasons_Variance_Fields>;
-};
-
-
-/** aggregate fields of "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Delivery_Feedback_Reasons_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
-/** order by aggregate values of table "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Aggregate_Order_By = {
-  avg?: Maybe<Delivery_Feedback_Reasons_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Delivery_Feedback_Reasons_Max_Order_By>;
-  min?: Maybe<Delivery_Feedback_Reasons_Min_Order_By>;
-  stddev?: Maybe<Delivery_Feedback_Reasons_Stddev_Order_By>;
-  stddev_pop?: Maybe<Delivery_Feedback_Reasons_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Delivery_Feedback_Reasons_Stddev_Samp_Order_By>;
-  sum?: Maybe<Delivery_Feedback_Reasons_Sum_Order_By>;
-  var_pop?: Maybe<Delivery_Feedback_Reasons_Var_Pop_Order_By>;
-  var_samp?: Maybe<Delivery_Feedback_Reasons_Var_Samp_Order_By>;
-  variance?: Maybe<Delivery_Feedback_Reasons_Variance_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Arr_Rel_Insert_Input = {
-  data: Array<Delivery_Feedback_Reasons_Insert_Input>;
-  /** on conflict condition */
-  on_conflict?: Maybe<Delivery_Feedback_Reasons_On_Conflict>;
-};
-
-/** aggregate avg on columns */
-export type Delivery_Feedback_Reasons_Avg_Fields = {
-  __typename?: 'delivery_feedback_reasons_avg_fields';
-  feedback_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** order by avg() on columns of table "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Avg_Order_By = {
-  feedback_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-};
-
-/** Boolean expression to filter rows from the table "delivery_feedback_reasons". All fields are combined with a logical 'AND'. */
-export type Delivery_Feedback_Reasons_Bool_Exp = {
-  _and?: Maybe<Array<Delivery_Feedback_Reasons_Bool_Exp>>;
-  _not?: Maybe<Delivery_Feedback_Reasons_Bool_Exp>;
-  _or?: Maybe<Array<Delivery_Feedback_Reasons_Bool_Exp>>;
-  comment?: Maybe<String_Comparison_Exp>;
-  feedback_id?: Maybe<Int_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  type?: Maybe<Delivery_Feedback_Reasons_Type_Enum_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "delivery_feedback_reasons" */
-export enum Delivery_Feedback_Reasons_Constraint {
-  /** unique or primary key constraint */
-  DeliveryFeedbackReasonsPkey = 'delivery_feedback_reasons_pkey'
-}
-
-/** input type for incrementing numeric columns in table "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Inc_Input = {
-  feedback_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Insert_Input = {
-  comment?: Maybe<Scalars['String']>;
-  feedback_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  type?: Maybe<Delivery_Feedback_Reasons_Type_Enum>;
-};
-
-/** aggregate max on columns */
-export type Delivery_Feedback_Reasons_Max_Fields = {
-  __typename?: 'delivery_feedback_reasons_max_fields';
-  comment?: Maybe<Scalars['String']>;
-  feedback_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-};
-
-/** order by max() on columns of table "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Max_Order_By = {
-  comment?: Maybe<Order_By>;
-  feedback_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-};
-
-/** aggregate min on columns */
-export type Delivery_Feedback_Reasons_Min_Fields = {
-  __typename?: 'delivery_feedback_reasons_min_fields';
-  comment?: Maybe<Scalars['String']>;
-  feedback_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-};
-
-/** order by min() on columns of table "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Min_Order_By = {
-  comment?: Maybe<Order_By>;
-  feedback_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-};
-
-/** response of any mutation on the table "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Mutation_Response = {
-  __typename?: 'delivery_feedback_reasons_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Delivery_Feedback_Reasons>;
-};
-
-/** on conflict condition type for table "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_On_Conflict = {
-  constraint: Delivery_Feedback_Reasons_Constraint;
-  update_columns?: Array<Delivery_Feedback_Reasons_Update_Column>;
-  where?: Maybe<Delivery_Feedback_Reasons_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "delivery_feedback_reasons". */
-export type Delivery_Feedback_Reasons_Order_By = {
-  comment?: Maybe<Order_By>;
-  feedback_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  type?: Maybe<Order_By>;
-};
-
-/** primary key columns input for table: delivery_feedback_reasons */
-export type Delivery_Feedback_Reasons_Pk_Columns_Input = {
-  id: Scalars['Int'];
-};
-
-/** select columns of table "delivery_feedback_reasons" */
-export enum Delivery_Feedback_Reasons_Select_Column {
-  /** column name */
-  Comment = 'comment',
-  /** column name */
-  FeedbackId = 'feedback_id',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Type = 'type'
-}
-
-/** input type for updating data in table "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Set_Input = {
-  comment?: Maybe<Scalars['String']>;
-  feedback_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  type?: Maybe<Delivery_Feedback_Reasons_Type_Enum>;
-};
-
-/** aggregate stddev on columns */
-export type Delivery_Feedback_Reasons_Stddev_Fields = {
-  __typename?: 'delivery_feedback_reasons_stddev_fields';
-  feedback_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev() on columns of table "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Stddev_Order_By = {
-  feedback_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Delivery_Feedback_Reasons_Stddev_Pop_Fields = {
-  __typename?: 'delivery_feedback_reasons_stddev_pop_fields';
-  feedback_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev_pop() on columns of table "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Stddev_Pop_Order_By = {
-  feedback_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Delivery_Feedback_Reasons_Stddev_Samp_Fields = {
-  __typename?: 'delivery_feedback_reasons_stddev_samp_fields';
-  feedback_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev_samp() on columns of table "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Stddev_Samp_Order_By = {
-  feedback_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-};
-
-/** aggregate sum on columns */
-export type Delivery_Feedback_Reasons_Sum_Fields = {
-  __typename?: 'delivery_feedback_reasons_sum_fields';
-  feedback_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-};
-
-/** order by sum() on columns of table "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Sum_Order_By = {
-  feedback_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-};
-
-/** columns and relationships of "delivery_feedback_reasons_type" */
-export type Delivery_Feedback_Reasons_Type = {
-  __typename?: 'delivery_feedback_reasons_type';
-  value: Scalars['String'];
-};
-
-/** aggregated selection of "delivery_feedback_reasons_type" */
-export type Delivery_Feedback_Reasons_Type_Aggregate = {
-  __typename?: 'delivery_feedback_reasons_type_aggregate';
-  aggregate?: Maybe<Delivery_Feedback_Reasons_Type_Aggregate_Fields>;
-  nodes: Array<Delivery_Feedback_Reasons_Type>;
-};
-
-/** aggregate fields of "delivery_feedback_reasons_type" */
-export type Delivery_Feedback_Reasons_Type_Aggregate_Fields = {
-  __typename?: 'delivery_feedback_reasons_type_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<Delivery_Feedback_Reasons_Type_Max_Fields>;
-  min?: Maybe<Delivery_Feedback_Reasons_Type_Min_Fields>;
-};
-
-
-/** aggregate fields of "delivery_feedback_reasons_type" */
-export type Delivery_Feedback_Reasons_Type_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Delivery_Feedback_Reasons_Type_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
-/** Boolean expression to filter rows from the table "delivery_feedback_reasons_type". All fields are combined with a logical 'AND'. */
-export type Delivery_Feedback_Reasons_Type_Bool_Exp = {
-  _and?: Maybe<Array<Delivery_Feedback_Reasons_Type_Bool_Exp>>;
-  _not?: Maybe<Delivery_Feedback_Reasons_Type_Bool_Exp>;
-  _or?: Maybe<Array<Delivery_Feedback_Reasons_Type_Bool_Exp>>;
-  value?: Maybe<String_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "delivery_feedback_reasons_type" */
-export enum Delivery_Feedback_Reasons_Type_Constraint {
-  /** unique or primary key constraint */
-  FeedbackTypesPkey = 'feedback_types_pkey'
-}
-
-export enum Delivery_Feedback_Reasons_Type_Enum {
-  App = 'app',
-  LateDelivery = 'late_delivery',
-  MissingProduct = 'missing_product',
-  Other = 'other',
-  Price = 'price',
-  SpoiltProduct = 'spoilt_product'
-}
-
-/** Boolean expression to compare columns of type "delivery_feedback_reasons_type_enum". All fields are combined with logical 'AND'. */
-export type Delivery_Feedback_Reasons_Type_Enum_Comparison_Exp = {
-  _eq?: Maybe<Delivery_Feedback_Reasons_Type_Enum>;
-  _in?: Maybe<Array<Delivery_Feedback_Reasons_Type_Enum>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _neq?: Maybe<Delivery_Feedback_Reasons_Type_Enum>;
-  _nin?: Maybe<Array<Delivery_Feedback_Reasons_Type_Enum>>;
-};
-
-/** input type for inserting data into table "delivery_feedback_reasons_type" */
-export type Delivery_Feedback_Reasons_Type_Insert_Input = {
-  value?: Maybe<Scalars['String']>;
-};
-
-/** aggregate max on columns */
-export type Delivery_Feedback_Reasons_Type_Max_Fields = {
-  __typename?: 'delivery_feedback_reasons_type_max_fields';
-  value?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type Delivery_Feedback_Reasons_Type_Min_Fields = {
-  __typename?: 'delivery_feedback_reasons_type_min_fields';
-  value?: Maybe<Scalars['String']>;
-};
-
-/** response of any mutation on the table "delivery_feedback_reasons_type" */
-export type Delivery_Feedback_Reasons_Type_Mutation_Response = {
-  __typename?: 'delivery_feedback_reasons_type_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Delivery_Feedback_Reasons_Type>;
-};
-
-/** on conflict condition type for table "delivery_feedback_reasons_type" */
-export type Delivery_Feedback_Reasons_Type_On_Conflict = {
-  constraint: Delivery_Feedback_Reasons_Type_Constraint;
-  update_columns?: Array<Delivery_Feedback_Reasons_Type_Update_Column>;
-  where?: Maybe<Delivery_Feedback_Reasons_Type_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "delivery_feedback_reasons_type". */
-export type Delivery_Feedback_Reasons_Type_Order_By = {
-  value?: Maybe<Order_By>;
-};
-
-/** primary key columns input for table: delivery_feedback_reasons_type */
-export type Delivery_Feedback_Reasons_Type_Pk_Columns_Input = {
-  value: Scalars['String'];
-};
-
-/** select columns of table "delivery_feedback_reasons_type" */
-export enum Delivery_Feedback_Reasons_Type_Select_Column {
-  /** column name */
-  Value = 'value'
-}
-
-/** input type for updating data in table "delivery_feedback_reasons_type" */
-export type Delivery_Feedback_Reasons_Type_Set_Input = {
-  value?: Maybe<Scalars['String']>;
-};
-
-/** update columns of table "delivery_feedback_reasons_type" */
-export enum Delivery_Feedback_Reasons_Type_Update_Column {
-  /** column name */
-  Value = 'value'
-}
-
-/** update columns of table "delivery_feedback_reasons" */
-export enum Delivery_Feedback_Reasons_Update_Column {
-  /** column name */
-  Comment = 'comment',
-  /** column name */
-  FeedbackId = 'feedback_id',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Type = 'type'
-}
-
-/** aggregate var_pop on columns */
-export type Delivery_Feedback_Reasons_Var_Pop_Fields = {
-  __typename?: 'delivery_feedback_reasons_var_pop_fields';
-  feedback_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** order by var_pop() on columns of table "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Var_Pop_Order_By = {
-  feedback_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-};
-
-/** aggregate var_samp on columns */
-export type Delivery_Feedback_Reasons_Var_Samp_Fields = {
-  __typename?: 'delivery_feedback_reasons_var_samp_fields';
-  feedback_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** order by var_samp() on columns of table "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Var_Samp_Order_By = {
-  feedback_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-};
-
-/** aggregate variance on columns */
-export type Delivery_Feedback_Reasons_Variance_Fields = {
-  __typename?: 'delivery_feedback_reasons_variance_fields';
-  feedback_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** order by variance() on columns of table "delivery_feedback_reasons" */
-export type Delivery_Feedback_Reasons_Variance_Order_By = {
-  feedback_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-};
-
 /** columns and relationships of "delivery_feedbacks" */
 export type Delivery_Feedbacks = {
   __typename?: 'delivery_feedbacks';
   answer: Feedback_Answer_Enum;
-  answer_comments?: Maybe<Scalars['String']>;
+  answer_comments: Scalars['String'];
   created_at: Scalars['timestamptz'];
-  /** An array relationship */
-  delivery_feedback_reasons: Array<Delivery_Feedback_Reasons>;
-  /** An aggregate relationship */
-  delivery_feedback_reasons_aggregate: Delivery_Feedback_Reasons_Aggregate;
-  id: Scalars['Int'];
   order_id: Scalars['uuid'];
   user_id: Scalars['uuid'];
-};
-
-
-/** columns and relationships of "delivery_feedbacks" */
-export type Delivery_FeedbacksDelivery_Feedback_ReasonsArgs = {
-  distinct_on?: Maybe<Array<Delivery_Feedback_Reasons_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Delivery_Feedback_Reasons_Order_By>>;
-  where?: Maybe<Delivery_Feedback_Reasons_Bool_Exp>;
-};
-
-
-/** columns and relationships of "delivery_feedbacks" */
-export type Delivery_FeedbacksDelivery_Feedback_Reasons_AggregateArgs = {
-  distinct_on?: Maybe<Array<Delivery_Feedback_Reasons_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Delivery_Feedback_Reasons_Order_By>>;
-  where?: Maybe<Delivery_Feedback_Reasons_Bool_Exp>;
 };
 
 /** aggregated selection of "delivery_feedbacks" */
@@ -3338,17 +2913,9 @@ export type Delivery_Feedbacks_Aggregate = {
 /** aggregate fields of "delivery_feedbacks" */
 export type Delivery_Feedbacks_Aggregate_Fields = {
   __typename?: 'delivery_feedbacks_aggregate_fields';
-  avg?: Maybe<Delivery_Feedbacks_Avg_Fields>;
   count: Scalars['Int'];
   max?: Maybe<Delivery_Feedbacks_Max_Fields>;
   min?: Maybe<Delivery_Feedbacks_Min_Fields>;
-  stddev?: Maybe<Delivery_Feedbacks_Stddev_Fields>;
-  stddev_pop?: Maybe<Delivery_Feedbacks_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Delivery_Feedbacks_Stddev_Samp_Fields>;
-  sum?: Maybe<Delivery_Feedbacks_Sum_Fields>;
-  var_pop?: Maybe<Delivery_Feedbacks_Var_Pop_Fields>;
-  var_samp?: Maybe<Delivery_Feedbacks_Var_Samp_Fields>;
-  variance?: Maybe<Delivery_Feedbacks_Variance_Fields>;
 };
 
 
@@ -3356,12 +2923,6 @@ export type Delivery_Feedbacks_Aggregate_Fields = {
 export type Delivery_Feedbacks_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Delivery_Feedbacks_Select_Column>>;
   distinct?: Maybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type Delivery_Feedbacks_Avg_Fields = {
-  __typename?: 'delivery_feedbacks_avg_fields';
-  id?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to filter rows from the table "delivery_feedbacks". All fields are combined with a logical 'AND'. */
@@ -3372,8 +2933,6 @@ export type Delivery_Feedbacks_Bool_Exp = {
   answer?: Maybe<Feedback_Answer_Enum_Comparison_Exp>;
   answer_comments?: Maybe<String_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  delivery_feedback_reasons?: Maybe<Delivery_Feedback_Reasons_Bool_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
   order_id?: Maybe<Uuid_Comparison_Exp>;
   user_id?: Maybe<Uuid_Comparison_Exp>;
 };
@@ -3381,23 +2940,14 @@ export type Delivery_Feedbacks_Bool_Exp = {
 /** unique or primary key constraints on table "delivery_feedbacks" */
 export enum Delivery_Feedbacks_Constraint {
   /** unique or primary key constraint */
-  DeliveryFeedbacksIdKey = 'delivery_feedbacks_id_key',
-  /** unique or primary key constraint */
   DeliveryFeedbacksPkey = 'delivery_feedbacks_pkey'
 }
-
-/** input type for incrementing numeric columns in table "delivery_feedbacks" */
-export type Delivery_Feedbacks_Inc_Input = {
-  id?: Maybe<Scalars['Int']>;
-};
 
 /** input type for inserting data into table "delivery_feedbacks" */
 export type Delivery_Feedbacks_Insert_Input = {
   answer?: Maybe<Feedback_Answer_Enum>;
   answer_comments?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  delivery_feedback_reasons?: Maybe<Delivery_Feedback_Reasons_Arr_Rel_Insert_Input>;
-  id?: Maybe<Scalars['Int']>;
   order_id?: Maybe<Scalars['uuid']>;
   user_id?: Maybe<Scalars['uuid']>;
 };
@@ -3407,7 +2957,6 @@ export type Delivery_Feedbacks_Max_Fields = {
   __typename?: 'delivery_feedbacks_max_fields';
   answer_comments?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
   order_id?: Maybe<Scalars['uuid']>;
   user_id?: Maybe<Scalars['uuid']>;
 };
@@ -3417,7 +2966,6 @@ export type Delivery_Feedbacks_Min_Fields = {
   __typename?: 'delivery_feedbacks_min_fields';
   answer_comments?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
   order_id?: Maybe<Scalars['uuid']>;
   user_id?: Maybe<Scalars['uuid']>;
 };
@@ -3443,15 +2991,13 @@ export type Delivery_Feedbacks_Order_By = {
   answer?: Maybe<Order_By>;
   answer_comments?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
-  delivery_feedback_reasons_aggregate?: Maybe<Delivery_Feedback_Reasons_Aggregate_Order_By>;
-  id?: Maybe<Order_By>;
   order_id?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
 
 /** primary key columns input for table: delivery_feedbacks */
 export type Delivery_Feedbacks_Pk_Columns_Input = {
-  id: Scalars['Int'];
+  order_id: Scalars['uuid'];
 };
 
 /** select columns of table "delivery_feedbacks" */
@@ -3463,8 +3009,6 @@ export enum Delivery_Feedbacks_Select_Column {
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
-  Id = 'id',
-  /** column name */
   OrderId = 'order_id',
   /** column name */
   UserId = 'user_id'
@@ -3475,33 +3019,8 @@ export type Delivery_Feedbacks_Set_Input = {
   answer?: Maybe<Feedback_Answer_Enum>;
   answer_comments?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
   order_id?: Maybe<Scalars['uuid']>;
   user_id?: Maybe<Scalars['uuid']>;
-};
-
-/** aggregate stddev on columns */
-export type Delivery_Feedbacks_Stddev_Fields = {
-  __typename?: 'delivery_feedbacks_stddev_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Delivery_Feedbacks_Stddev_Pop_Fields = {
-  __typename?: 'delivery_feedbacks_stddev_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Delivery_Feedbacks_Stddev_Samp_Fields = {
-  __typename?: 'delivery_feedbacks_stddev_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Delivery_Feedbacks_Sum_Fields = {
-  __typename?: 'delivery_feedbacks_sum_fields';
-  id?: Maybe<Scalars['Int']>;
 };
 
 /** update columns of table "delivery_feedbacks" */
@@ -3513,30 +3032,10 @@ export enum Delivery_Feedbacks_Update_Column {
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
-  Id = 'id',
-  /** column name */
   OrderId = 'order_id',
   /** column name */
   UserId = 'user_id'
 }
-
-/** aggregate var_pop on columns */
-export type Delivery_Feedbacks_Var_Pop_Fields = {
-  __typename?: 'delivery_feedbacks_var_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Delivery_Feedbacks_Var_Samp_Fields = {
-  __typename?: 'delivery_feedbacks_var_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Delivery_Feedbacks_Variance_Fields = {
-  __typename?: 'delivery_feedbacks_variance_fields';
-  id?: Maybe<Scalars['Float']>;
-};
 
 /** columns and relationships of "delivery_method" */
 export type Delivery_Method = {
@@ -3587,6 +3086,7 @@ export enum Delivery_Method_Enum {
   Mtools = 'mtools',
   Onfleet = 'onfleet',
   Stuart = 'stuart',
+  Uberdirect = 'uberdirect',
   Ubereats = 'ubereats'
 }
 
@@ -3782,7 +3282,7 @@ export enum Delivery_Status_Update_Column {
 /** columns and relationships of "discount_type" */
 export type Discount_Type = {
   __typename?: 'discount_type';
-  comment?: Maybe<Scalars['String']>;
+  comment: Scalars['String'];
   value: Scalars['String'];
 };
 
@@ -4384,270 +3884,6 @@ export enum Feedback_Answer_Update_Column {
   Value = 'value'
 }
 
-/** columns and relationships of "feedback_info" */
-export type Feedback_Info = {
-  __typename?: 'feedback_info';
-  comment?: Maybe<Scalars['String']>;
-  created_at: Scalars['timestamptz'];
-  feedback_id: Scalars['uuid'];
-  id: Scalars['uuid'];
-  reason?: Maybe<Feedback_Reasons_Enum>;
-};
-
-/** aggregated selection of "feedback_info" */
-export type Feedback_Info_Aggregate = {
-  __typename?: 'feedback_info_aggregate';
-  aggregate?: Maybe<Feedback_Info_Aggregate_Fields>;
-  nodes: Array<Feedback_Info>;
-};
-
-/** aggregate fields of "feedback_info" */
-export type Feedback_Info_Aggregate_Fields = {
-  __typename?: 'feedback_info_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<Feedback_Info_Max_Fields>;
-  min?: Maybe<Feedback_Info_Min_Fields>;
-};
-
-
-/** aggregate fields of "feedback_info" */
-export type Feedback_Info_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Feedback_Info_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
-/** Boolean expression to filter rows from the table "feedback_info". All fields are combined with a logical 'AND'. */
-export type Feedback_Info_Bool_Exp = {
-  _and?: Maybe<Array<Feedback_Info_Bool_Exp>>;
-  _not?: Maybe<Feedback_Info_Bool_Exp>;
-  _or?: Maybe<Array<Feedback_Info_Bool_Exp>>;
-  comment?: Maybe<String_Comparison_Exp>;
-  created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  feedback_id?: Maybe<Uuid_Comparison_Exp>;
-  id?: Maybe<Uuid_Comparison_Exp>;
-  reason?: Maybe<Feedback_Reasons_Enum_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "feedback_info" */
-export enum Feedback_Info_Constraint {
-  /** unique or primary key constraint */
-  FeedbackInfoPkey = 'feedback_info_pkey'
-}
-
-/** input type for inserting data into table "feedback_info" */
-export type Feedback_Info_Insert_Input = {
-  comment?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  feedback_id?: Maybe<Scalars['uuid']>;
-  id?: Maybe<Scalars['uuid']>;
-  reason?: Maybe<Feedback_Reasons_Enum>;
-};
-
-/** aggregate max on columns */
-export type Feedback_Info_Max_Fields = {
-  __typename?: 'feedback_info_max_fields';
-  comment?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  feedback_id?: Maybe<Scalars['uuid']>;
-  id?: Maybe<Scalars['uuid']>;
-};
-
-/** aggregate min on columns */
-export type Feedback_Info_Min_Fields = {
-  __typename?: 'feedback_info_min_fields';
-  comment?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  feedback_id?: Maybe<Scalars['uuid']>;
-  id?: Maybe<Scalars['uuid']>;
-};
-
-/** response of any mutation on the table "feedback_info" */
-export type Feedback_Info_Mutation_Response = {
-  __typename?: 'feedback_info_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Feedback_Info>;
-};
-
-/** on conflict condition type for table "feedback_info" */
-export type Feedback_Info_On_Conflict = {
-  constraint: Feedback_Info_Constraint;
-  update_columns?: Array<Feedback_Info_Update_Column>;
-  where?: Maybe<Feedback_Info_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "feedback_info". */
-export type Feedback_Info_Order_By = {
-  comment?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  feedback_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  reason?: Maybe<Order_By>;
-};
-
-/** primary key columns input for table: feedback_info */
-export type Feedback_Info_Pk_Columns_Input = {
-  id: Scalars['uuid'];
-};
-
-/** select columns of table "feedback_info" */
-export enum Feedback_Info_Select_Column {
-  /** column name */
-  Comment = 'comment',
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  FeedbackId = 'feedback_id',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Reason = 'reason'
-}
-
-/** input type for updating data in table "feedback_info" */
-export type Feedback_Info_Set_Input = {
-  comment?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  feedback_id?: Maybe<Scalars['uuid']>;
-  id?: Maybe<Scalars['uuid']>;
-  reason?: Maybe<Feedback_Reasons_Enum>;
-};
-
-/** update columns of table "feedback_info" */
-export enum Feedback_Info_Update_Column {
-  /** column name */
-  Comment = 'comment',
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  FeedbackId = 'feedback_id',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Reason = 'reason'
-}
-
-/** columns and relationships of "feedback_reasons" */
-export type Feedback_Reasons = {
-  __typename?: 'feedback_reasons';
-  value: Scalars['String'];
-};
-
-/** aggregated selection of "feedback_reasons" */
-export type Feedback_Reasons_Aggregate = {
-  __typename?: 'feedback_reasons_aggregate';
-  aggregate?: Maybe<Feedback_Reasons_Aggregate_Fields>;
-  nodes: Array<Feedback_Reasons>;
-};
-
-/** aggregate fields of "feedback_reasons" */
-export type Feedback_Reasons_Aggregate_Fields = {
-  __typename?: 'feedback_reasons_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<Feedback_Reasons_Max_Fields>;
-  min?: Maybe<Feedback_Reasons_Min_Fields>;
-};
-
-
-/** aggregate fields of "feedback_reasons" */
-export type Feedback_Reasons_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Feedback_Reasons_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
-/** Boolean expression to filter rows from the table "feedback_reasons". All fields are combined with a logical 'AND'. */
-export type Feedback_Reasons_Bool_Exp = {
-  _and?: Maybe<Array<Feedback_Reasons_Bool_Exp>>;
-  _not?: Maybe<Feedback_Reasons_Bool_Exp>;
-  _or?: Maybe<Array<Feedback_Reasons_Bool_Exp>>;
-  value?: Maybe<String_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "feedback_reasons" */
-export enum Feedback_Reasons_Constraint {
-  /** unique or primary key constraint */
-  FeedbackReasonsPkey = 'feedback_reasons_pkey'
-}
-
-export enum Feedback_Reasons_Enum {
-  App = 'app',
-  Delivery = 'delivery',
-  MissingProduct = 'missing_product',
-  Other = 'other',
-  Price = 'price',
-  SploitProduct = 'sploit_product'
-}
-
-/** Boolean expression to compare columns of type "feedback_reasons_enum". All fields are combined with logical 'AND'. */
-export type Feedback_Reasons_Enum_Comparison_Exp = {
-  _eq?: Maybe<Feedback_Reasons_Enum>;
-  _in?: Maybe<Array<Feedback_Reasons_Enum>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _neq?: Maybe<Feedback_Reasons_Enum>;
-  _nin?: Maybe<Array<Feedback_Reasons_Enum>>;
-};
-
-/** input type for inserting data into table "feedback_reasons" */
-export type Feedback_Reasons_Insert_Input = {
-  value?: Maybe<Scalars['String']>;
-};
-
-/** aggregate max on columns */
-export type Feedback_Reasons_Max_Fields = {
-  __typename?: 'feedback_reasons_max_fields';
-  value?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type Feedback_Reasons_Min_Fields = {
-  __typename?: 'feedback_reasons_min_fields';
-  value?: Maybe<Scalars['String']>;
-};
-
-/** response of any mutation on the table "feedback_reasons" */
-export type Feedback_Reasons_Mutation_Response = {
-  __typename?: 'feedback_reasons_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Feedback_Reasons>;
-};
-
-/** on conflict condition type for table "feedback_reasons" */
-export type Feedback_Reasons_On_Conflict = {
-  constraint: Feedback_Reasons_Constraint;
-  update_columns?: Array<Feedback_Reasons_Update_Column>;
-  where?: Maybe<Feedback_Reasons_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "feedback_reasons". */
-export type Feedback_Reasons_Order_By = {
-  value?: Maybe<Order_By>;
-};
-
-/** primary key columns input for table: feedback_reasons */
-export type Feedback_Reasons_Pk_Columns_Input = {
-  value: Scalars['String'];
-};
-
-/** select columns of table "feedback_reasons" */
-export enum Feedback_Reasons_Select_Column {
-  /** column name */
-  Value = 'value'
-}
-
-/** input type for updating data in table "feedback_reasons" */
-export type Feedback_Reasons_Set_Input = {
-  value?: Maybe<Scalars['String']>;
-};
-
-/** update columns of table "feedback_reasons" */
-export enum Feedback_Reasons_Update_Column {
-  /** column name */
-  Value = 'value'
-}
-
 /** Boolean expression to compare columns of type "float8". All fields are combined with logical 'AND'. */
 export type Float8_Comparison_Exp = {
   _eq?: Maybe<Scalars['float8']>;
@@ -4743,10 +3979,10 @@ export type Gift_Rules = {
   gift_rules_warehouses_aggregate: Gift_Rules_Warehouse_Aggregate;
   id: Scalars['uuid'];
   is_enable: Scalars['Boolean'];
-  max_order_value?: Maybe<Scalars['numeric']>;
-  min_order_value?: Maybe<Scalars['numeric']>;
+  max_order_value: Scalars['numeric'];
+  min_order_value: Scalars['numeric'];
   name: Scalars['String'];
-  order_count?: Maybe<Scalars['numeric']>;
+  order_count: Scalars['numeric'];
   start_date?: Maybe<Scalars['date']>;
 };
 
@@ -5611,7 +4847,7 @@ export type Gifts_Bool_Exp = {
 /** unique or primary key constraints on table "gifts" */
 export enum Gifts_Constraint {
   /** unique or primary key constraint */
-  GiftRulesGiftIdKey = 'gift_rules_gift_id_key',
+  GiftsIdKey = 'gifts_id_key',
   /** unique or primary key constraint */
   GiftsPkey = 'gifts_pkey'
 }
@@ -6718,6 +5954,7 @@ export type Mutation_Root = {
   createMtoolsDelivery?: Maybe<CreateMtoolsDeliveryOutput>;
   createStaffUser?: Maybe<CreateStaffUserOutput>;
   createStuartDelivery?: Maybe<CreateStuartDeliveryOutput>;
+  createUberDirectDelivery?: Maybe<CreateUberDirectDeliveryOutput>;
   deleteUserPersonalData?: Maybe<DeleteUserOutput>;
   /** delete data from the table: "address_label" */
   delete_address_label?: Maybe<Address_Label_Mutation_Response>;
@@ -6763,14 +6000,6 @@ export type Mutation_Root = {
   delete_deliveries_group?: Maybe<Deliveries_Group_Mutation_Response>;
   /** delete single row from the table: "deliveries_group" */
   delete_deliveries_group_by_pk?: Maybe<Deliveries_Group>;
-  /** delete data from the table: "delivery_feedback_reasons" */
-  delete_delivery_feedback_reasons?: Maybe<Delivery_Feedback_Reasons_Mutation_Response>;
-  /** delete single row from the table: "delivery_feedback_reasons" */
-  delete_delivery_feedback_reasons_by_pk?: Maybe<Delivery_Feedback_Reasons>;
-  /** delete data from the table: "delivery_feedback_reasons_type" */
-  delete_delivery_feedback_reasons_type?: Maybe<Delivery_Feedback_Reasons_Type_Mutation_Response>;
-  /** delete single row from the table: "delivery_feedback_reasons_type" */
-  delete_delivery_feedback_reasons_type_by_pk?: Maybe<Delivery_Feedback_Reasons_Type>;
   /** delete data from the table: "delivery_feedbacks" */
   delete_delivery_feedbacks?: Maybe<Delivery_Feedbacks_Mutation_Response>;
   /** delete single row from the table: "delivery_feedbacks" */
@@ -6795,14 +6024,6 @@ export type Mutation_Root = {
   delete_feedback_answer?: Maybe<Feedback_Answer_Mutation_Response>;
   /** delete single row from the table: "feedback_answer" */
   delete_feedback_answer_by_pk?: Maybe<Feedback_Answer>;
-  /** delete data from the table: "feedback_info" */
-  delete_feedback_info?: Maybe<Feedback_Info_Mutation_Response>;
-  /** delete single row from the table: "feedback_info" */
-  delete_feedback_info_by_pk?: Maybe<Feedback_Info>;
-  /** delete data from the table: "feedback_reasons" */
-  delete_feedback_reasons?: Maybe<Feedback_Reasons_Mutation_Response>;
-  /** delete single row from the table: "feedback_reasons" */
-  delete_feedback_reasons_by_pk?: Maybe<Feedback_Reasons>;
   /** delete data from the table: "gift_rules" */
   delete_gift_rules?: Maybe<Gift_Rules_Mutation_Response>;
   /** delete single row from the table: "gift_rules" */
@@ -6931,6 +6152,10 @@ export type Mutation_Root = {
   delete_tags?: Maybe<Tags_Mutation_Response>;
   /** delete single row from the table: "tags" */
   delete_tags_by_pk?: Maybe<Tags>;
+  /** delete data from the table: "transporter_criterias" */
+  delete_transporter_criterias?: Maybe<Transporter_Criterias_Mutation_Response>;
+  /** delete single row from the table: "transporter_criterias" */
+  delete_transporter_criterias_by_pk?: Maybe<Transporter_Criterias>;
   /** delete data from the table: "transports" */
   delete_transports?: Maybe<Transports_Mutation_Response>;
   /** delete single row from the table: "transports" */
@@ -7035,14 +6260,6 @@ export type Mutation_Root = {
   insert_deliveries_group_one?: Maybe<Deliveries_Group>;
   /** insert a single row into the table: "deliveries" */
   insert_deliveries_one?: Maybe<Deliveries>;
-  /** insert data into the table: "delivery_feedback_reasons" */
-  insert_delivery_feedback_reasons?: Maybe<Delivery_Feedback_Reasons_Mutation_Response>;
-  /** insert a single row into the table: "delivery_feedback_reasons" */
-  insert_delivery_feedback_reasons_one?: Maybe<Delivery_Feedback_Reasons>;
-  /** insert data into the table: "delivery_feedback_reasons_type" */
-  insert_delivery_feedback_reasons_type?: Maybe<Delivery_Feedback_Reasons_Type_Mutation_Response>;
-  /** insert a single row into the table: "delivery_feedback_reasons_type" */
-  insert_delivery_feedback_reasons_type_one?: Maybe<Delivery_Feedback_Reasons_Type>;
   /** insert data into the table: "delivery_feedbacks" */
   insert_delivery_feedbacks?: Maybe<Delivery_Feedbacks_Mutation_Response>;
   /** insert a single row into the table: "delivery_feedbacks" */
@@ -7067,14 +6284,6 @@ export type Mutation_Root = {
   insert_feedback_answer?: Maybe<Feedback_Answer_Mutation_Response>;
   /** insert a single row into the table: "feedback_answer" */
   insert_feedback_answer_one?: Maybe<Feedback_Answer>;
-  /** insert data into the table: "feedback_info" */
-  insert_feedback_info?: Maybe<Feedback_Info_Mutation_Response>;
-  /** insert a single row into the table: "feedback_info" */
-  insert_feedback_info_one?: Maybe<Feedback_Info>;
-  /** insert data into the table: "feedback_reasons" */
-  insert_feedback_reasons?: Maybe<Feedback_Reasons_Mutation_Response>;
-  /** insert a single row into the table: "feedback_reasons" */
-  insert_feedback_reasons_one?: Maybe<Feedback_Reasons>;
   /** insert data into the table: "gift_rules" */
   insert_gift_rules?: Maybe<Gift_Rules_Mutation_Response>;
   /** insert data into the table: "gift_rules_category" */
@@ -7203,6 +6412,10 @@ export type Mutation_Root = {
   insert_tags?: Maybe<Tags_Mutation_Response>;
   /** insert a single row into the table: "tags" */
   insert_tags_one?: Maybe<Tags>;
+  /** insert data into the table: "transporter_criterias" */
+  insert_transporter_criterias?: Maybe<Transporter_Criterias_Mutation_Response>;
+  /** insert a single row into the table: "transporter_criterias" */
+  insert_transporter_criterias_one?: Maybe<Transporter_Criterias>;
   /** insert data into the table: "transports" */
   insert_transports?: Maybe<Transports_Mutation_Response>;
   /** insert a single row into the table: "transports" */
@@ -7321,14 +6534,6 @@ export type Mutation_Root = {
   update_deliveries_group?: Maybe<Deliveries_Group_Mutation_Response>;
   /** update single row of the table: "deliveries_group" */
   update_deliveries_group_by_pk?: Maybe<Deliveries_Group>;
-  /** update data of the table: "delivery_feedback_reasons" */
-  update_delivery_feedback_reasons?: Maybe<Delivery_Feedback_Reasons_Mutation_Response>;
-  /** update single row of the table: "delivery_feedback_reasons" */
-  update_delivery_feedback_reasons_by_pk?: Maybe<Delivery_Feedback_Reasons>;
-  /** update data of the table: "delivery_feedback_reasons_type" */
-  update_delivery_feedback_reasons_type?: Maybe<Delivery_Feedback_Reasons_Type_Mutation_Response>;
-  /** update single row of the table: "delivery_feedback_reasons_type" */
-  update_delivery_feedback_reasons_type_by_pk?: Maybe<Delivery_Feedback_Reasons_Type>;
   /** update data of the table: "delivery_feedbacks" */
   update_delivery_feedbacks?: Maybe<Delivery_Feedbacks_Mutation_Response>;
   /** update single row of the table: "delivery_feedbacks" */
@@ -7353,14 +6558,6 @@ export type Mutation_Root = {
   update_feedback_answer?: Maybe<Feedback_Answer_Mutation_Response>;
   /** update single row of the table: "feedback_answer" */
   update_feedback_answer_by_pk?: Maybe<Feedback_Answer>;
-  /** update data of the table: "feedback_info" */
-  update_feedback_info?: Maybe<Feedback_Info_Mutation_Response>;
-  /** update single row of the table: "feedback_info" */
-  update_feedback_info_by_pk?: Maybe<Feedback_Info>;
-  /** update data of the table: "feedback_reasons" */
-  update_feedback_reasons?: Maybe<Feedback_Reasons_Mutation_Response>;
-  /** update single row of the table: "feedback_reasons" */
-  update_feedback_reasons_by_pk?: Maybe<Feedback_Reasons>;
   /** update data of the table: "gift_rules" */
   update_gift_rules?: Maybe<Gift_Rules_Mutation_Response>;
   /** update single row of the table: "gift_rules" */
@@ -7489,6 +6686,10 @@ export type Mutation_Root = {
   update_tags?: Maybe<Tags_Mutation_Response>;
   /** update single row of the table: "tags" */
   update_tags_by_pk?: Maybe<Tags>;
+  /** update data of the table: "transporter_criterias" */
+  update_transporter_criterias?: Maybe<Transporter_Criterias_Mutation_Response>;
+  /** update single row of the table: "transporter_criterias" */
+  update_transporter_criterias_by_pk?: Maybe<Transporter_Criterias>;
   /** update data of the table: "transports" */
   update_transports?: Maybe<Transports_Mutation_Response>;
   /** update single row of the table: "transports" */
@@ -7610,6 +6811,12 @@ export type Mutation_RootCreateStaffUserArgs = {
 
 /** mutation root */
 export type Mutation_RootCreateStuartDeliveryArgs = {
+  orderId: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootCreateUberDirectDeliveryArgs = {
   orderId: Scalars['uuid'];
 };
 
@@ -7754,30 +6961,6 @@ export type Mutation_RootDelete_Deliveries_Group_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootDelete_Delivery_Feedback_ReasonsArgs = {
-  where: Delivery_Feedback_Reasons_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Delivery_Feedback_Reasons_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Delivery_Feedback_Reasons_TypeArgs = {
-  where: Delivery_Feedback_Reasons_Type_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Delivery_Feedback_Reasons_Type_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-/** mutation root */
 export type Mutation_RootDelete_Delivery_FeedbacksArgs = {
   where: Delivery_Feedbacks_Bool_Exp;
 };
@@ -7785,7 +6968,7 @@ export type Mutation_RootDelete_Delivery_FeedbacksArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Delivery_Feedbacks_By_PkArgs = {
-  id: Scalars['Int'];
+  order_id: Scalars['uuid'];
 };
 
 
@@ -7845,30 +7028,6 @@ export type Mutation_RootDelete_Feedback_AnswerArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Feedback_Answer_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Feedback_InfoArgs = {
-  where: Feedback_Info_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Feedback_Info_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Feedback_ReasonsArgs = {
-  where: Feedback_Reasons_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Feedback_Reasons_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -8266,6 +7425,19 @@ export type Mutation_RootDelete_Tags_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootDelete_Transporter_CriteriasArgs = {
+  where: Transporter_Criterias_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Transporter_Criterias_By_PkArgs = {
+  transport_mode: Scalars['String'];
+  transporter_name: Delivery_Method_Enum;
+};
+
+
+/** mutation root */
 export type Mutation_RootDelete_TransportsArgs = {
   where: Transports_Bool_Exp;
 };
@@ -8614,34 +7786,6 @@ export type Mutation_RootInsert_Deliveries_OneArgs = {
 
 
 /** mutation root */
-export type Mutation_RootInsert_Delivery_Feedback_ReasonsArgs = {
-  objects: Array<Delivery_Feedback_Reasons_Insert_Input>;
-  on_conflict?: Maybe<Delivery_Feedback_Reasons_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Delivery_Feedback_Reasons_OneArgs = {
-  object: Delivery_Feedback_Reasons_Insert_Input;
-  on_conflict?: Maybe<Delivery_Feedback_Reasons_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Delivery_Feedback_Reasons_TypeArgs = {
-  objects: Array<Delivery_Feedback_Reasons_Type_Insert_Input>;
-  on_conflict?: Maybe<Delivery_Feedback_Reasons_Type_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Delivery_Feedback_Reasons_Type_OneArgs = {
-  object: Delivery_Feedback_Reasons_Type_Insert_Input;
-  on_conflict?: Maybe<Delivery_Feedback_Reasons_Type_On_Conflict>;
-};
-
-
-/** mutation root */
 export type Mutation_RootInsert_Delivery_FeedbacksArgs = {
   objects: Array<Delivery_Feedbacks_Insert_Input>;
   on_conflict?: Maybe<Delivery_Feedbacks_On_Conflict>;
@@ -8722,34 +7866,6 @@ export type Mutation_RootInsert_Feedback_AnswerArgs = {
 export type Mutation_RootInsert_Feedback_Answer_OneArgs = {
   object: Feedback_Answer_Insert_Input;
   on_conflict?: Maybe<Feedback_Answer_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Feedback_InfoArgs = {
-  objects: Array<Feedback_Info_Insert_Input>;
-  on_conflict?: Maybe<Feedback_Info_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Feedback_Info_OneArgs = {
-  object: Feedback_Info_Insert_Input;
-  on_conflict?: Maybe<Feedback_Info_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Feedback_ReasonsArgs = {
-  objects: Array<Feedback_Reasons_Insert_Input>;
-  on_conflict?: Maybe<Feedback_Reasons_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Feedback_Reasons_OneArgs = {
-  object: Feedback_Reasons_Insert_Input;
-  on_conflict?: Maybe<Feedback_Reasons_On_Conflict>;
 };
 
 
@@ -9198,6 +8314,20 @@ export type Mutation_RootInsert_TagsArgs = {
 export type Mutation_RootInsert_Tags_OneArgs = {
   object: Tags_Insert_Input;
   on_conflict?: Maybe<Tags_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Transporter_CriteriasArgs = {
+  objects: Array<Transporter_Criterias_Insert_Input>;
+  on_conflict?: Maybe<Transporter_Criterias_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Transporter_Criterias_OneArgs = {
+  object: Transporter_Criterias_Insert_Input;
+  on_conflict?: Maybe<Transporter_Criterias_On_Conflict>;
 };
 
 
@@ -9673,38 +8803,7 @@ export type Mutation_RootUpdate_Deliveries_Group_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Delivery_Feedback_ReasonsArgs = {
-  _inc?: Maybe<Delivery_Feedback_Reasons_Inc_Input>;
-  _set?: Maybe<Delivery_Feedback_Reasons_Set_Input>;
-  where: Delivery_Feedback_Reasons_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Delivery_Feedback_Reasons_By_PkArgs = {
-  _inc?: Maybe<Delivery_Feedback_Reasons_Inc_Input>;
-  _set?: Maybe<Delivery_Feedback_Reasons_Set_Input>;
-  pk_columns: Delivery_Feedback_Reasons_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Delivery_Feedback_Reasons_TypeArgs = {
-  _set?: Maybe<Delivery_Feedback_Reasons_Type_Set_Input>;
-  where: Delivery_Feedback_Reasons_Type_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Delivery_Feedback_Reasons_Type_By_PkArgs = {
-  _set?: Maybe<Delivery_Feedback_Reasons_Type_Set_Input>;
-  pk_columns: Delivery_Feedback_Reasons_Type_Pk_Columns_Input;
-};
-
-
-/** mutation root */
 export type Mutation_RootUpdate_Delivery_FeedbacksArgs = {
-  _inc?: Maybe<Delivery_Feedbacks_Inc_Input>;
   _set?: Maybe<Delivery_Feedbacks_Set_Input>;
   where: Delivery_Feedbacks_Bool_Exp;
 };
@@ -9712,7 +8811,6 @@ export type Mutation_RootUpdate_Delivery_FeedbacksArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_Delivery_Feedbacks_By_PkArgs = {
-  _inc?: Maybe<Delivery_Feedbacks_Inc_Input>;
   _set?: Maybe<Delivery_Feedbacks_Set_Input>;
   pk_columns: Delivery_Feedbacks_Pk_Columns_Input;
 };
@@ -9787,34 +8885,6 @@ export type Mutation_RootUpdate_Feedback_AnswerArgs = {
 export type Mutation_RootUpdate_Feedback_Answer_By_PkArgs = {
   _set?: Maybe<Feedback_Answer_Set_Input>;
   pk_columns: Feedback_Answer_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Feedback_InfoArgs = {
-  _set?: Maybe<Feedback_Info_Set_Input>;
-  where: Feedback_Info_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Feedback_Info_By_PkArgs = {
-  _set?: Maybe<Feedback_Info_Set_Input>;
-  pk_columns: Feedback_Info_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Feedback_ReasonsArgs = {
-  _set?: Maybe<Feedback_Reasons_Set_Input>;
-  where: Feedback_Reasons_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Feedback_Reasons_By_PkArgs = {
-  _set?: Maybe<Feedback_Reasons_Set_Input>;
-  pk_columns: Feedback_Reasons_Pk_Columns_Input;
 };
 
 
@@ -10299,6 +9369,20 @@ export type Mutation_RootUpdate_TagsArgs = {
 export type Mutation_RootUpdate_Tags_By_PkArgs = {
   _set?: Maybe<Tags_Set_Input>;
   pk_columns: Tags_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Transporter_CriteriasArgs = {
+  _set?: Maybe<Transporter_Criterias_Set_Input>;
+  where: Transporter_Criterias_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Transporter_Criterias_By_PkArgs = {
+  _set?: Maybe<Transporter_Criterias_Set_Input>;
+  pk_columns: Transporter_Criterias_Pk_Columns_Input;
 };
 
 
@@ -11374,12 +10458,12 @@ export type Orders = {
   address_city: Scalars['String'];
   address_country?: Maybe<Scalars['String']>;
   address_instructions?: Maybe<Scalars['String']>;
-  address_is_outside?: Maybe<Scalars['Boolean']>;
+  address_is_outside: Scalars['Boolean'];
   address_line_1: Scalars['String'];
   address_line_2?: Maybe<Scalars['String']>;
   address_postal_code: Scalars['String'];
   cancelation_reason?: Maybe<Scalars['String']>;
-  canceled_at?: Maybe<Scalars['timestamptz']>;
+  canceled_at?: Maybe<Scalars['timestamp']>;
   /** A computed field, executes function "confirmation_time_seconds" */
   confirmation_time_seconds?: Maybe<Scalars['float8']>;
   confirmed_at?: Maybe<Scalars['timestamptz']>;
@@ -11401,7 +10485,6 @@ export type Orders = {
   /** A computed field, executes function "delivery_time_seconds" */
   delivery_time_seconds?: Maybe<Scalars['float8']>;
   discount_applied?: Maybe<Scalars['numeric']>;
-  feedback_id?: Maybe<Scalars['uuid']>;
   has_given_feedback: Scalars['Boolean'];
   id: Scalars['uuid'];
   invoice?: Maybe<Scalars['String']>;
@@ -11410,7 +10493,7 @@ export type Orders = {
   longitude?: Maybe<Scalars['float8']>;
   /** A computed field, executes function "max_acceptable_delivered_at" */
   max_acceptable_delivered_at?: Maybe<Scalars['timestamptz']>;
-  notification_sent_one_minute: Scalars['Boolean'];
+  notification_sent_one_minute?: Maybe<Scalars['Boolean']>;
   number: Scalars['Int'];
   /** An array relationship */
   order_items: Array<Order_Items>;
@@ -11582,7 +10665,7 @@ export type Orders_Bool_Exp = {
   address_line_2?: Maybe<String_Comparison_Exp>;
   address_postal_code?: Maybe<String_Comparison_Exp>;
   cancelation_reason?: Maybe<String_Comparison_Exp>;
-  canceled_at?: Maybe<Timestamptz_Comparison_Exp>;
+  canceled_at?: Maybe<Timestamp_Comparison_Exp>;
   confirmation_time_seconds?: Maybe<Float8_Comparison_Exp>;
   confirmed_at?: Maybe<Timestamptz_Comparison_Exp>;
   coupon_code?: Maybe<String_Comparison_Exp>;
@@ -11599,7 +10682,6 @@ export type Orders_Bool_Exp = {
   delivery_stop_id?: Maybe<String_Comparison_Exp>;
   delivery_time_seconds?: Maybe<Float8_Comparison_Exp>;
   discount_applied?: Maybe<Numeric_Comparison_Exp>;
-  feedback_id?: Maybe<Uuid_Comparison_Exp>;
   has_given_feedback?: Maybe<Boolean_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   invoice?: Maybe<String_Comparison_Exp>;
@@ -11639,6 +10721,8 @@ export type Orders_Bool_Exp = {
 /** unique or primary key constraints on table "orders" */
 export enum Orders_Constraint {
   /** unique or primary key constraint */
+  OrdersDeliveryIdKey = 'orders_delivery_id_key',
+  /** unique or primary key constraint */
   OrdersNumberKey = 'orders_number_key',
   /** unique or primary key constraint */
   OrdersPkey = 'orders_pkey',
@@ -11669,7 +10753,7 @@ export type Orders_Insert_Input = {
   address_line_2?: Maybe<Scalars['String']>;
   address_postal_code?: Maybe<Scalars['String']>;
   cancelation_reason?: Maybe<Scalars['String']>;
-  canceled_at?: Maybe<Scalars['timestamptz']>;
+  canceled_at?: Maybe<Scalars['timestamp']>;
   confirmed_at?: Maybe<Scalars['timestamptz']>;
   coupon_code?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
@@ -11684,7 +10768,6 @@ export type Orders_Insert_Input = {
   delivery_status?: Maybe<Delivery_Status_Enum>;
   delivery_stop_id?: Maybe<Scalars['String']>;
   discount_applied?: Maybe<Scalars['numeric']>;
-  feedback_id?: Maybe<Scalars['uuid']>;
   has_given_feedback?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['uuid']>;
   invoice?: Maybe<Scalars['String']>;
@@ -11727,7 +10810,7 @@ export type Orders_Max_Fields = {
   address_line_2?: Maybe<Scalars['String']>;
   address_postal_code?: Maybe<Scalars['String']>;
   cancelation_reason?: Maybe<Scalars['String']>;
-  canceled_at?: Maybe<Scalars['timestamptz']>;
+  canceled_at?: Maybe<Scalars['timestamp']>;
   confirmed_at?: Maybe<Scalars['timestamptz']>;
   coupon_code?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
@@ -11739,7 +10822,6 @@ export type Orders_Max_Fields = {
   delivery_id?: Maybe<Scalars['String']>;
   delivery_stop_id?: Maybe<Scalars['String']>;
   discount_applied?: Maybe<Scalars['numeric']>;
-  feedback_id?: Maybe<Scalars['uuid']>;
   id?: Maybe<Scalars['uuid']>;
   invoice?: Maybe<Scalars['String']>;
   latitude?: Maybe<Scalars['float8']>;
@@ -11780,7 +10862,6 @@ export type Orders_Max_Order_By = {
   delivery_id?: Maybe<Order_By>;
   delivery_stop_id?: Maybe<Order_By>;
   discount_applied?: Maybe<Order_By>;
-  feedback_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   invoice?: Maybe<Order_By>;
   latitude?: Maybe<Order_By>;
@@ -11810,7 +10891,7 @@ export type Orders_Min_Fields = {
   address_line_2?: Maybe<Scalars['String']>;
   address_postal_code?: Maybe<Scalars['String']>;
   cancelation_reason?: Maybe<Scalars['String']>;
-  canceled_at?: Maybe<Scalars['timestamptz']>;
+  canceled_at?: Maybe<Scalars['timestamp']>;
   confirmed_at?: Maybe<Scalars['timestamptz']>;
   coupon_code?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
@@ -11822,7 +10903,6 @@ export type Orders_Min_Fields = {
   delivery_id?: Maybe<Scalars['String']>;
   delivery_stop_id?: Maybe<Scalars['String']>;
   discount_applied?: Maybe<Scalars['numeric']>;
-  feedback_id?: Maybe<Scalars['uuid']>;
   id?: Maybe<Scalars['uuid']>;
   invoice?: Maybe<Scalars['String']>;
   latitude?: Maybe<Scalars['float8']>;
@@ -11863,7 +10943,6 @@ export type Orders_Min_Order_By = {
   delivery_id?: Maybe<Order_By>;
   delivery_stop_id?: Maybe<Order_By>;
   discount_applied?: Maybe<Order_By>;
-  feedback_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   invoice?: Maybe<Order_By>;
   latitude?: Maybe<Order_By>;
@@ -11933,7 +11012,6 @@ export type Orders_Order_By = {
   delivery_stop_id?: Maybe<Order_By>;
   delivery_time_seconds?: Maybe<Order_By>;
   discount_applied?: Maybe<Order_By>;
-  feedback_id?: Maybe<Order_By>;
   has_given_feedback?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   invoice?: Maybe<Order_By>;
@@ -12022,8 +11100,6 @@ export enum Orders_Select_Column {
   /** column name */
   DiscountApplied = 'discount_applied',
   /** column name */
-  FeedbackId = 'feedback_id',
-  /** column name */
   HasGivenFeedback = 'has_given_feedback',
   /** column name */
   Id = 'id',
@@ -12083,7 +11159,7 @@ export type Orders_Set_Input = {
   address_line_2?: Maybe<Scalars['String']>;
   address_postal_code?: Maybe<Scalars['String']>;
   cancelation_reason?: Maybe<Scalars['String']>;
-  canceled_at?: Maybe<Scalars['timestamptz']>;
+  canceled_at?: Maybe<Scalars['timestamp']>;
   confirmed_at?: Maybe<Scalars['timestamptz']>;
   coupon_code?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
@@ -12097,7 +11173,6 @@ export type Orders_Set_Input = {
   delivery_status?: Maybe<Delivery_Status_Enum>;
   delivery_stop_id?: Maybe<Scalars['String']>;
   discount_applied?: Maybe<Scalars['numeric']>;
-  feedback_id?: Maybe<Scalars['uuid']>;
   has_given_feedback?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['uuid']>;
   invoice?: Maybe<Scalars['String']>;
@@ -12279,8 +11354,6 @@ export enum Orders_Update_Column {
   /** column name */
   DiscountApplied = 'discount_applied',
   /** column name */
-  FeedbackId = 'feedback_id',
-  /** column name */
   HasGivenFeedback = 'has_given_feedback',
   /** column name */
   Id = 'id',
@@ -12450,7 +11523,7 @@ export type Payment_Method_Bool_Exp = {
 /** unique or primary key constraints on table "payment_method" */
 export enum Payment_Method_Constraint {
   /** unique or primary key constraint */
-  PaymentMethodTypePkey = 'payment_method_type_pkey'
+  PaymentMethodPkey = 'payment_method_pkey'
 }
 
 export enum Payment_Method_Enum {
@@ -14171,18 +13244,6 @@ export type Query_Root = {
   deliveries_group_aggregate: Deliveries_Group_Aggregate;
   /** fetch data from the table: "deliveries_group" using primary key columns */
   deliveries_group_by_pk?: Maybe<Deliveries_Group>;
-  /** An array relationship */
-  delivery_feedback_reasons: Array<Delivery_Feedback_Reasons>;
-  /** An aggregate relationship */
-  delivery_feedback_reasons_aggregate: Delivery_Feedback_Reasons_Aggregate;
-  /** fetch data from the table: "delivery_feedback_reasons" using primary key columns */
-  delivery_feedback_reasons_by_pk?: Maybe<Delivery_Feedback_Reasons>;
-  /** fetch data from the table: "delivery_feedback_reasons_type" */
-  delivery_feedback_reasons_type: Array<Delivery_Feedback_Reasons_Type>;
-  /** fetch aggregated fields from the table: "delivery_feedback_reasons_type" */
-  delivery_feedback_reasons_type_aggregate: Delivery_Feedback_Reasons_Type_Aggregate;
-  /** fetch data from the table: "delivery_feedback_reasons_type" using primary key columns */
-  delivery_feedback_reasons_type_by_pk?: Maybe<Delivery_Feedback_Reasons_Type>;
   /** fetch data from the table: "delivery_feedbacks" */
   delivery_feedbacks: Array<Delivery_Feedbacks>;
   /** fetch aggregated fields from the table: "delivery_feedbacks" */
@@ -14219,18 +13280,6 @@ export type Query_Root = {
   feedback_answer_aggregate: Feedback_Answer_Aggregate;
   /** fetch data from the table: "feedback_answer" using primary key columns */
   feedback_answer_by_pk?: Maybe<Feedback_Answer>;
-  /** fetch data from the table: "feedback_info" */
-  feedback_info: Array<Feedback_Info>;
-  /** fetch aggregated fields from the table: "feedback_info" */
-  feedback_info_aggregate: Feedback_Info_Aggregate;
-  /** fetch data from the table: "feedback_info" using primary key columns */
-  feedback_info_by_pk?: Maybe<Feedback_Info>;
-  /** fetch data from the table: "feedback_reasons" */
-  feedback_reasons: Array<Feedback_Reasons>;
-  /** fetch aggregated fields from the table: "feedback_reasons" */
-  feedback_reasons_aggregate: Feedback_Reasons_Aggregate;
-  /** fetch data from the table: "feedback_reasons" using primary key columns */
-  feedback_reasons_by_pk?: Maybe<Feedback_Reasons>;
   getUserWarehouseDeliveryETA?: Maybe<DeliveryEtaOutput>;
   /** fetch data from the table: "gift_rules" */
   gift_rules: Array<Gift_Rules>;
@@ -14429,6 +13478,12 @@ export type Query_Root = {
   tags_aggregate: Tags_Aggregate;
   /** fetch data from the table: "tags" using primary key columns */
   tags_by_pk?: Maybe<Tags>;
+  /** fetch data from the table: "transporter_criterias" */
+  transporter_criterias: Array<Transporter_Criterias>;
+  /** fetch aggregated fields from the table: "transporter_criterias" */
+  transporter_criterias_aggregate: Transporter_Criterias_Aggregate;
+  /** fetch data from the table: "transporter_criterias" using primary key columns */
+  transporter_criterias_by_pk?: Maybe<Transporter_Criterias>;
   /** fetch data from the table: "transports" */
   transports: Array<Transports>;
   /** fetch aggregated fields from the table: "transports" */
@@ -14774,52 +13829,6 @@ export type Query_RootDeliveries_Group_By_PkArgs = {
 };
 
 
-export type Query_RootDelivery_Feedback_ReasonsArgs = {
-  distinct_on?: Maybe<Array<Delivery_Feedback_Reasons_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Delivery_Feedback_Reasons_Order_By>>;
-  where?: Maybe<Delivery_Feedback_Reasons_Bool_Exp>;
-};
-
-
-export type Query_RootDelivery_Feedback_Reasons_AggregateArgs = {
-  distinct_on?: Maybe<Array<Delivery_Feedback_Reasons_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Delivery_Feedback_Reasons_Order_By>>;
-  where?: Maybe<Delivery_Feedback_Reasons_Bool_Exp>;
-};
-
-
-export type Query_RootDelivery_Feedback_Reasons_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type Query_RootDelivery_Feedback_Reasons_TypeArgs = {
-  distinct_on?: Maybe<Array<Delivery_Feedback_Reasons_Type_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Delivery_Feedback_Reasons_Type_Order_By>>;
-  where?: Maybe<Delivery_Feedback_Reasons_Type_Bool_Exp>;
-};
-
-
-export type Query_RootDelivery_Feedback_Reasons_Type_AggregateArgs = {
-  distinct_on?: Maybe<Array<Delivery_Feedback_Reasons_Type_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Delivery_Feedback_Reasons_Type_Order_By>>;
-  where?: Maybe<Delivery_Feedback_Reasons_Type_Bool_Exp>;
-};
-
-
-export type Query_RootDelivery_Feedback_Reasons_Type_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
 export type Query_RootDelivery_FeedbacksArgs = {
   distinct_on?: Maybe<Array<Delivery_Feedbacks_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -14839,7 +13848,7 @@ export type Query_RootDelivery_Feedbacks_AggregateArgs = {
 
 
 export type Query_RootDelivery_Feedbacks_By_PkArgs = {
-  id: Scalars['Int'];
+  order_id: Scalars['uuid'];
 };
 
 
@@ -14954,52 +13963,6 @@ export type Query_RootFeedback_Answer_AggregateArgs = {
 
 
 export type Query_RootFeedback_Answer_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-export type Query_RootFeedback_InfoArgs = {
-  distinct_on?: Maybe<Array<Feedback_Info_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Feedback_Info_Order_By>>;
-  where?: Maybe<Feedback_Info_Bool_Exp>;
-};
-
-
-export type Query_RootFeedback_Info_AggregateArgs = {
-  distinct_on?: Maybe<Array<Feedback_Info_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Feedback_Info_Order_By>>;
-  where?: Maybe<Feedback_Info_Bool_Exp>;
-};
-
-
-export type Query_RootFeedback_Info_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Query_RootFeedback_ReasonsArgs = {
-  distinct_on?: Maybe<Array<Feedback_Reasons_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Feedback_Reasons_Order_By>>;
-  where?: Maybe<Feedback_Reasons_Bool_Exp>;
-};
-
-
-export type Query_RootFeedback_Reasons_AggregateArgs = {
-  distinct_on?: Maybe<Array<Feedback_Reasons_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Feedback_Reasons_Order_By>>;
-  where?: Maybe<Feedback_Reasons_Bool_Exp>;
-};
-
-
-export type Query_RootFeedback_Reasons_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -15777,6 +14740,30 @@ export type Query_RootTags_AggregateArgs = {
 
 export type Query_RootTags_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+export type Query_RootTransporter_CriteriasArgs = {
+  distinct_on?: Maybe<Array<Transporter_Criterias_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Transporter_Criterias_Order_By>>;
+  where?: Maybe<Transporter_Criterias_Bool_Exp>;
+};
+
+
+export type Query_RootTransporter_Criterias_AggregateArgs = {
+  distinct_on?: Maybe<Array<Transporter_Criterias_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Transporter_Criterias_Order_By>>;
+  where?: Maybe<Transporter_Criterias_Bool_Exp>;
+};
+
+
+export type Query_RootTransporter_Criterias_By_PkArgs = {
+  transport_mode: Scalars['String'];
+  transporter_name: Delivery_Method_Enum;
 };
 
 
@@ -16603,7 +15590,7 @@ export type Role_Type_Bool_Exp = {
 /** unique or primary key constraints on table "role_type" */
 export enum Role_Type_Constraint {
   /** unique or primary key constraint */
-  RolesTypePkey = 'roles_type_pkey'
+  RoleTypePkey = 'role_type_pkey'
 }
 
 export enum Role_Type_Enum {
@@ -16792,8 +15779,6 @@ export enum Staff_Users_Constraint {
   /** unique or primary key constraint */
   StaffUsersEmailKey = 'staff_users_email_key',
   /** unique or primary key constraint */
-  StaffUsersIdKey = 'staff_users_id_key',
-  /** unique or primary key constraint */
   StaffUsersPkey = 'staff_users_pkey'
 }
 
@@ -16892,8 +15877,6 @@ export type Store_Category = {
   category_id: Scalars['uuid'];
   order: Scalars['Int'];
   picture?: Maybe<Scalars['String']>;
-  /** An object relationship */
-  store: Stores;
   store_id: Scalars['uuid'];
   updated_at: Scalars['timestamptz'];
 };
@@ -16970,7 +15953,6 @@ export type Store_Category_Bool_Exp = {
   category_id?: Maybe<Uuid_Comparison_Exp>;
   order?: Maybe<Int_Comparison_Exp>;
   picture?: Maybe<String_Comparison_Exp>;
-  store?: Maybe<Stores_Bool_Exp>;
   store_id?: Maybe<Uuid_Comparison_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
 };
@@ -16992,7 +15974,6 @@ export type Store_Category_Insert_Input = {
   category_id?: Maybe<Scalars['uuid']>;
   order?: Maybe<Scalars['Int']>;
   picture?: Maybe<Scalars['String']>;
-  store?: Maybe<Stores_Obj_Rel_Insert_Input>;
   store_id?: Maybe<Scalars['uuid']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
@@ -17057,7 +16038,6 @@ export type Store_Category_Order_By = {
   category_id?: Maybe<Order_By>;
   order?: Maybe<Order_By>;
   picture?: Maybe<Order_By>;
-  store?: Maybe<Stores_Order_By>;
   store_id?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
@@ -17854,10 +16834,10 @@ export type Store_Products_Variance_Order_By = {
 /** columns and relationships of "stores" */
 export type Stores = {
   __typename?: 'stores';
-  created_at: Scalars['timestamptz'];
-  handle?: Maybe<Scalars['String']>;
+  created_at: Scalars['timestamp'];
+  handle: Scalars['String'];
   id: Scalars['uuid'];
-  is_paused?: Maybe<Scalars['Boolean']>;
+  is_paused: Scalars['Boolean'];
   name: Scalars['String'];
   /** fetch data from the table: "orders" */
   orders: Array<Orders>;
@@ -17871,10 +16851,6 @@ export type Stores = {
   store_hours: Array<Store_Hours>;
   /** An aggregate relationship */
   store_hours_aggregate: Store_Hours_Aggregate;
-  /** An array relationship */
-  store_products: Array<Store_Products>;
-  /** An aggregate relationship */
-  store_products_aggregate: Store_Products_Aggregate;
   uber_eats_id?: Maybe<Scalars['String']>;
   updated_at: Scalars['timestamptz'];
   /** An object relationship */
@@ -17942,26 +16918,6 @@ export type StoresStore_Hours_AggregateArgs = {
   where?: Maybe<Store_Hours_Bool_Exp>;
 };
 
-
-/** columns and relationships of "stores" */
-export type StoresStore_ProductsArgs = {
-  distinct_on?: Maybe<Array<Store_Products_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Store_Products_Order_By>>;
-  where?: Maybe<Store_Products_Bool_Exp>;
-};
-
-
-/** columns and relationships of "stores" */
-export type StoresStore_Products_AggregateArgs = {
-  distinct_on?: Maybe<Array<Store_Products_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Store_Products_Order_By>>;
-  where?: Maybe<Store_Products_Bool_Exp>;
-};
-
 /** aggregated selection of "stores" */
 export type Stores_Aggregate = {
   __typename?: 'stores_aggregate';
@@ -17989,7 +16945,7 @@ export type Stores_Bool_Exp = {
   _and?: Maybe<Array<Stores_Bool_Exp>>;
   _not?: Maybe<Stores_Bool_Exp>;
   _or?: Maybe<Array<Stores_Bool_Exp>>;
-  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  created_at?: Maybe<Timestamp_Comparison_Exp>;
   handle?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   is_paused?: Maybe<Boolean_Comparison_Exp>;
@@ -17997,7 +16953,6 @@ export type Stores_Bool_Exp = {
   orders?: Maybe<Orders_Bool_Exp>;
   store_categories?: Maybe<Store_Category_Bool_Exp>;
   store_hours?: Maybe<Store_Hours_Bool_Exp>;
-  store_products?: Maybe<Store_Products_Bool_Exp>;
   uber_eats_id?: Maybe<String_Comparison_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
   warehouse?: Maybe<Warehouses_Bool_Exp>;
@@ -18009,6 +16964,8 @@ export enum Stores_Constraint {
   /** unique or primary key constraint */
   StoresHandleKey = 'stores_handle_key',
   /** unique or primary key constraint */
+  StoresIdKey = 'stores_id_key',
+  /** unique or primary key constraint */
   StoresNameKey = 'stores_name_key',
   /** unique or primary key constraint */
   StoresPkey = 'stores_pkey'
@@ -18016,7 +16973,7 @@ export enum Stores_Constraint {
 
 /** input type for inserting data into table "stores" */
 export type Stores_Insert_Input = {
-  created_at?: Maybe<Scalars['timestamptz']>;
+  created_at?: Maybe<Scalars['timestamp']>;
   handle?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   is_paused?: Maybe<Scalars['Boolean']>;
@@ -18024,7 +16981,6 @@ export type Stores_Insert_Input = {
   orders?: Maybe<Orders_Arr_Rel_Insert_Input>;
   store_categories?: Maybe<Store_Category_Arr_Rel_Insert_Input>;
   store_hours?: Maybe<Store_Hours_Arr_Rel_Insert_Input>;
-  store_products?: Maybe<Store_Products_Arr_Rel_Insert_Input>;
   uber_eats_id?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   warehouse?: Maybe<Warehouses_Obj_Rel_Insert_Input>;
@@ -18034,7 +16990,7 @@ export type Stores_Insert_Input = {
 /** aggregate max on columns */
 export type Stores_Max_Fields = {
   __typename?: 'stores_max_fields';
-  created_at?: Maybe<Scalars['timestamptz']>;
+  created_at?: Maybe<Scalars['timestamp']>;
   handle?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
@@ -18046,7 +17002,7 @@ export type Stores_Max_Fields = {
 /** aggregate min on columns */
 export type Stores_Min_Fields = {
   __typename?: 'stores_min_fields';
-  created_at?: Maybe<Scalars['timestamptz']>;
+  created_at?: Maybe<Scalars['timestamp']>;
   handle?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
@@ -18088,7 +17044,6 @@ export type Stores_Order_By = {
   orders_aggregate?: Maybe<Orders_Aggregate_Order_By>;
   store_categories_aggregate?: Maybe<Store_Category_Aggregate_Order_By>;
   store_hours_aggregate?: Maybe<Store_Hours_Aggregate_Order_By>;
-  store_products_aggregate?: Maybe<Store_Products_Aggregate_Order_By>;
   uber_eats_id?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   warehouse?: Maybe<Warehouses_Order_By>;
@@ -18122,7 +17077,7 @@ export enum Stores_Select_Column {
 
 /** input type for updating data in table "stores" */
 export type Stores_Set_Input = {
-  created_at?: Maybe<Scalars['timestamptz']>;
+  created_at?: Maybe<Scalars['timestamp']>;
   handle?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   is_paused?: Maybe<Scalars['Boolean']>;
@@ -18600,18 +17555,6 @@ export type Subscription_Root = {
   deliveries_group_aggregate: Deliveries_Group_Aggregate;
   /** fetch data from the table: "deliveries_group" using primary key columns */
   deliveries_group_by_pk?: Maybe<Deliveries_Group>;
-  /** An array relationship */
-  delivery_feedback_reasons: Array<Delivery_Feedback_Reasons>;
-  /** An aggregate relationship */
-  delivery_feedback_reasons_aggregate: Delivery_Feedback_Reasons_Aggregate;
-  /** fetch data from the table: "delivery_feedback_reasons" using primary key columns */
-  delivery_feedback_reasons_by_pk?: Maybe<Delivery_Feedback_Reasons>;
-  /** fetch data from the table: "delivery_feedback_reasons_type" */
-  delivery_feedback_reasons_type: Array<Delivery_Feedback_Reasons_Type>;
-  /** fetch aggregated fields from the table: "delivery_feedback_reasons_type" */
-  delivery_feedback_reasons_type_aggregate: Delivery_Feedback_Reasons_Type_Aggregate;
-  /** fetch data from the table: "delivery_feedback_reasons_type" using primary key columns */
-  delivery_feedback_reasons_type_by_pk?: Maybe<Delivery_Feedback_Reasons_Type>;
   /** fetch data from the table: "delivery_feedbacks" */
   delivery_feedbacks: Array<Delivery_Feedbacks>;
   /** fetch aggregated fields from the table: "delivery_feedbacks" */
@@ -18648,18 +17591,6 @@ export type Subscription_Root = {
   feedback_answer_aggregate: Feedback_Answer_Aggregate;
   /** fetch data from the table: "feedback_answer" using primary key columns */
   feedback_answer_by_pk?: Maybe<Feedback_Answer>;
-  /** fetch data from the table: "feedback_info" */
-  feedback_info: Array<Feedback_Info>;
-  /** fetch aggregated fields from the table: "feedback_info" */
-  feedback_info_aggregate: Feedback_Info_Aggregate;
-  /** fetch data from the table: "feedback_info" using primary key columns */
-  feedback_info_by_pk?: Maybe<Feedback_Info>;
-  /** fetch data from the table: "feedback_reasons" */
-  feedback_reasons: Array<Feedback_Reasons>;
-  /** fetch aggregated fields from the table: "feedback_reasons" */
-  feedback_reasons_aggregate: Feedback_Reasons_Aggregate;
-  /** fetch data from the table: "feedback_reasons" using primary key columns */
-  feedback_reasons_by_pk?: Maybe<Feedback_Reasons>;
   /** fetch data from the table: "gift_rules" */
   gift_rules: Array<Gift_Rules>;
   /** fetch aggregated fields from the table: "gift_rules" */
@@ -18856,6 +17787,12 @@ export type Subscription_Root = {
   tags_aggregate: Tags_Aggregate;
   /** fetch data from the table: "tags" using primary key columns */
   tags_by_pk?: Maybe<Tags>;
+  /** fetch data from the table: "transporter_criterias" */
+  transporter_criterias: Array<Transporter_Criterias>;
+  /** fetch aggregated fields from the table: "transporter_criterias" */
+  transporter_criterias_aggregate: Transporter_Criterias_Aggregate;
+  /** fetch data from the table: "transporter_criterias" using primary key columns */
+  transporter_criterias_by_pk?: Maybe<Transporter_Criterias>;
   /** fetch data from the table: "transports" */
   transports: Array<Transports>;
   /** fetch aggregated fields from the table: "transports" */
@@ -19201,52 +18138,6 @@ export type Subscription_RootDeliveries_Group_By_PkArgs = {
 };
 
 
-export type Subscription_RootDelivery_Feedback_ReasonsArgs = {
-  distinct_on?: Maybe<Array<Delivery_Feedback_Reasons_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Delivery_Feedback_Reasons_Order_By>>;
-  where?: Maybe<Delivery_Feedback_Reasons_Bool_Exp>;
-};
-
-
-export type Subscription_RootDelivery_Feedback_Reasons_AggregateArgs = {
-  distinct_on?: Maybe<Array<Delivery_Feedback_Reasons_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Delivery_Feedback_Reasons_Order_By>>;
-  where?: Maybe<Delivery_Feedback_Reasons_Bool_Exp>;
-};
-
-
-export type Subscription_RootDelivery_Feedback_Reasons_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type Subscription_RootDelivery_Feedback_Reasons_TypeArgs = {
-  distinct_on?: Maybe<Array<Delivery_Feedback_Reasons_Type_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Delivery_Feedback_Reasons_Type_Order_By>>;
-  where?: Maybe<Delivery_Feedback_Reasons_Type_Bool_Exp>;
-};
-
-
-export type Subscription_RootDelivery_Feedback_Reasons_Type_AggregateArgs = {
-  distinct_on?: Maybe<Array<Delivery_Feedback_Reasons_Type_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Delivery_Feedback_Reasons_Type_Order_By>>;
-  where?: Maybe<Delivery_Feedback_Reasons_Type_Bool_Exp>;
-};
-
-
-export type Subscription_RootDelivery_Feedback_Reasons_Type_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
 export type Subscription_RootDelivery_FeedbacksArgs = {
   distinct_on?: Maybe<Array<Delivery_Feedbacks_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -19266,7 +18157,7 @@ export type Subscription_RootDelivery_Feedbacks_AggregateArgs = {
 
 
 export type Subscription_RootDelivery_Feedbacks_By_PkArgs = {
-  id: Scalars['Int'];
+  order_id: Scalars['uuid'];
 };
 
 
@@ -19381,52 +18272,6 @@ export type Subscription_RootFeedback_Answer_AggregateArgs = {
 
 
 export type Subscription_RootFeedback_Answer_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-export type Subscription_RootFeedback_InfoArgs = {
-  distinct_on?: Maybe<Array<Feedback_Info_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Feedback_Info_Order_By>>;
-  where?: Maybe<Feedback_Info_Bool_Exp>;
-};
-
-
-export type Subscription_RootFeedback_Info_AggregateArgs = {
-  distinct_on?: Maybe<Array<Feedback_Info_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Feedback_Info_Order_By>>;
-  where?: Maybe<Feedback_Info_Bool_Exp>;
-};
-
-
-export type Subscription_RootFeedback_Info_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Subscription_RootFeedback_ReasonsArgs = {
-  distinct_on?: Maybe<Array<Feedback_Reasons_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Feedback_Reasons_Order_By>>;
-  where?: Maybe<Feedback_Reasons_Bool_Exp>;
-};
-
-
-export type Subscription_RootFeedback_Reasons_AggregateArgs = {
-  distinct_on?: Maybe<Array<Feedback_Reasons_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Feedback_Reasons_Order_By>>;
-  where?: Maybe<Feedback_Reasons_Bool_Exp>;
-};
-
-
-export type Subscription_RootFeedback_Reasons_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -20195,6 +19040,30 @@ export type Subscription_RootTags_By_PkArgs = {
 };
 
 
+export type Subscription_RootTransporter_CriteriasArgs = {
+  distinct_on?: Maybe<Array<Transporter_Criterias_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Transporter_Criterias_Order_By>>;
+  where?: Maybe<Transporter_Criterias_Bool_Exp>;
+};
+
+
+export type Subscription_RootTransporter_Criterias_AggregateArgs = {
+  distinct_on?: Maybe<Array<Transporter_Criterias_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Transporter_Criterias_Order_By>>;
+  where?: Maybe<Transporter_Criterias_Bool_Exp>;
+};
+
+
+export type Subscription_RootTransporter_Criterias_By_PkArgs = {
+  transport_mode: Scalars['String'];
+  transporter_name: Delivery_Method_Enum;
+};
+
+
 export type Subscription_RootTransportsArgs = {
   distinct_on?: Maybe<Array<Transports_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -20582,7 +19451,7 @@ export type System_Information_Bool_Exp = {
 /** unique or primary key constraints on table "system_information" */
 export enum System_Information_Constraint {
   /** unique or primary key constraint */
-  SystemInformationsPkey = 'system_informations_pkey'
+  SystemInformationPkey = 'system_information_pkey'
 }
 
 /** input type for inserting data into table "system_information" */
@@ -20801,6 +19670,19 @@ export enum Tags_Update_Column {
   TagValue = 'tag_value'
 }
 
+/** Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'. */
+export type Timestamp_Comparison_Exp = {
+  _eq?: Maybe<Scalars['timestamp']>;
+  _gt?: Maybe<Scalars['timestamp']>;
+  _gte?: Maybe<Scalars['timestamp']>;
+  _in?: Maybe<Array<Scalars['timestamp']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['timestamp']>;
+  _lte?: Maybe<Scalars['timestamp']>;
+  _neq?: Maybe<Scalars['timestamp']>;
+  _nin?: Maybe<Array<Scalars['timestamp']>>;
+};
+
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
 export type Timestamptz_Comparison_Exp = {
   _eq?: Maybe<Scalars['timestamptz']>;
@@ -20813,6 +19695,140 @@ export type Timestamptz_Comparison_Exp = {
   _neq?: Maybe<Scalars['timestamptz']>;
   _nin?: Maybe<Array<Scalars['timestamptz']>>;
 };
+
+/** columns and relationships of "transporter_criterias" */
+export type Transporter_Criterias = {
+  __typename?: 'transporter_criterias';
+  availability_by_cities: Scalars['String'];
+  transport_mode: Scalars['String'];
+  transporter_name: Delivery_Method_Enum;
+  weight_criterias: Scalars['String'];
+};
+
+/** aggregated selection of "transporter_criterias" */
+export type Transporter_Criterias_Aggregate = {
+  __typename?: 'transporter_criterias_aggregate';
+  aggregate?: Maybe<Transporter_Criterias_Aggregate_Fields>;
+  nodes: Array<Transporter_Criterias>;
+};
+
+/** aggregate fields of "transporter_criterias" */
+export type Transporter_Criterias_Aggregate_Fields = {
+  __typename?: 'transporter_criterias_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Transporter_Criterias_Max_Fields>;
+  min?: Maybe<Transporter_Criterias_Min_Fields>;
+};
+
+
+/** aggregate fields of "transporter_criterias" */
+export type Transporter_Criterias_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Transporter_Criterias_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "transporter_criterias". All fields are combined with a logical 'AND'. */
+export type Transporter_Criterias_Bool_Exp = {
+  _and?: Maybe<Array<Transporter_Criterias_Bool_Exp>>;
+  _not?: Maybe<Transporter_Criterias_Bool_Exp>;
+  _or?: Maybe<Array<Transporter_Criterias_Bool_Exp>>;
+  availability_by_cities?: Maybe<String_Comparison_Exp>;
+  transport_mode?: Maybe<String_Comparison_Exp>;
+  transporter_name?: Maybe<Delivery_Method_Enum_Comparison_Exp>;
+  weight_criterias?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "transporter_criterias" */
+export enum Transporter_Criterias_Constraint {
+  /** unique or primary key constraint */
+  TransporterCriteriasPkey = 'transporter_criterias_pkey'
+}
+
+/** input type for inserting data into table "transporter_criterias" */
+export type Transporter_Criterias_Insert_Input = {
+  availability_by_cities?: Maybe<Scalars['String']>;
+  transport_mode?: Maybe<Scalars['String']>;
+  transporter_name?: Maybe<Delivery_Method_Enum>;
+  weight_criterias?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Transporter_Criterias_Max_Fields = {
+  __typename?: 'transporter_criterias_max_fields';
+  availability_by_cities?: Maybe<Scalars['String']>;
+  transport_mode?: Maybe<Scalars['String']>;
+  weight_criterias?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Transporter_Criterias_Min_Fields = {
+  __typename?: 'transporter_criterias_min_fields';
+  availability_by_cities?: Maybe<Scalars['String']>;
+  transport_mode?: Maybe<Scalars['String']>;
+  weight_criterias?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "transporter_criterias" */
+export type Transporter_Criterias_Mutation_Response = {
+  __typename?: 'transporter_criterias_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Transporter_Criterias>;
+};
+
+/** on conflict condition type for table "transporter_criterias" */
+export type Transporter_Criterias_On_Conflict = {
+  constraint: Transporter_Criterias_Constraint;
+  update_columns?: Array<Transporter_Criterias_Update_Column>;
+  where?: Maybe<Transporter_Criterias_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "transporter_criterias". */
+export type Transporter_Criterias_Order_By = {
+  availability_by_cities?: Maybe<Order_By>;
+  transport_mode?: Maybe<Order_By>;
+  transporter_name?: Maybe<Order_By>;
+  weight_criterias?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: transporter_criterias */
+export type Transporter_Criterias_Pk_Columns_Input = {
+  transport_mode: Scalars['String'];
+  transporter_name: Delivery_Method_Enum;
+};
+
+/** select columns of table "transporter_criterias" */
+export enum Transporter_Criterias_Select_Column {
+  /** column name */
+  AvailabilityByCities = 'availability_by_cities',
+  /** column name */
+  TransportMode = 'transport_mode',
+  /** column name */
+  TransporterName = 'transporter_name',
+  /** column name */
+  WeightCriterias = 'weight_criterias'
+}
+
+/** input type for updating data in table "transporter_criterias" */
+export type Transporter_Criterias_Set_Input = {
+  availability_by_cities?: Maybe<Scalars['String']>;
+  transport_mode?: Maybe<Scalars['String']>;
+  transporter_name?: Maybe<Delivery_Method_Enum>;
+  weight_criterias?: Maybe<Scalars['String']>;
+};
+
+/** update columns of table "transporter_criterias" */
+export enum Transporter_Criterias_Update_Column {
+  /** column name */
+  AvailabilityByCities = 'availability_by_cities',
+  /** column name */
+  TransportMode = 'transport_mode',
+  /** column name */
+  TransporterName = 'transporter_name',
+  /** column name */
+  WeightCriterias = 'weight_criterias'
+}
 
 /** columns and relationships of "transports" */
 export type Transports = {
@@ -20919,18 +19935,19 @@ export enum Transports_Update_Column {
 /** columns and relationships of "user_addresses" */
 export type User_Addresses = {
   __typename?: 'user_addresses';
-  address_line_1?: Maybe<Scalars['String']>;
+  address_line_1: Scalars['String'];
   address_line_2?: Maybe<Scalars['String']>;
-  city?: Maybe<Scalars['String']>;
-  country?: Maybe<Scalars['String']>;
+  city: Scalars['String'];
+  country: Scalars['String'];
   created_at: Scalars['timestamptz'];
   id: Scalars['uuid'];
   instructions?: Maybe<Scalars['String']>;
   is_outside: Scalars['Boolean'];
-  label?: Maybe<Address_Label_Enum>;
+  label?: Maybe<Scalars['String']>;
+  label_enum?: Maybe<Address_Label_Enum>;
   latitude?: Maybe<Scalars['float8']>;
   longitude?: Maybe<Scalars['float8']>;
-  postal_code?: Maybe<Scalars['String']>;
+  postal_code: Scalars['String'];
   updated_at: Scalars['timestamptz'];
   user_id: Scalars['uuid'];
 };
@@ -21013,7 +20030,8 @@ export type User_Addresses_Bool_Exp = {
   id?: Maybe<Uuid_Comparison_Exp>;
   instructions?: Maybe<String_Comparison_Exp>;
   is_outside?: Maybe<Boolean_Comparison_Exp>;
-  label?: Maybe<Address_Label_Enum_Comparison_Exp>;
+  label?: Maybe<String_Comparison_Exp>;
+  label_enum?: Maybe<Address_Label_Enum_Comparison_Exp>;
   latitude?: Maybe<Float8_Comparison_Exp>;
   longitude?: Maybe<Float8_Comparison_Exp>;
   postal_code?: Maybe<String_Comparison_Exp>;
@@ -21043,7 +20061,8 @@ export type User_Addresses_Insert_Input = {
   id?: Maybe<Scalars['uuid']>;
   instructions?: Maybe<Scalars['String']>;
   is_outside?: Maybe<Scalars['Boolean']>;
-  label?: Maybe<Address_Label_Enum>;
+  label?: Maybe<Scalars['String']>;
+  label_enum?: Maybe<Address_Label_Enum>;
   latitude?: Maybe<Scalars['float8']>;
   longitude?: Maybe<Scalars['float8']>;
   postal_code?: Maybe<Scalars['String']>;
@@ -21061,6 +20080,7 @@ export type User_Addresses_Max_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   instructions?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
   latitude?: Maybe<Scalars['float8']>;
   longitude?: Maybe<Scalars['float8']>;
   postal_code?: Maybe<Scalars['String']>;
@@ -21077,6 +20097,7 @@ export type User_Addresses_Max_Order_By = {
   created_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   instructions?: Maybe<Order_By>;
+  label?: Maybe<Order_By>;
   latitude?: Maybe<Order_By>;
   longitude?: Maybe<Order_By>;
   postal_code?: Maybe<Order_By>;
@@ -21094,6 +20115,7 @@ export type User_Addresses_Min_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   instructions?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
   latitude?: Maybe<Scalars['float8']>;
   longitude?: Maybe<Scalars['float8']>;
   postal_code?: Maybe<Scalars['String']>;
@@ -21110,6 +20132,7 @@ export type User_Addresses_Min_Order_By = {
   created_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   instructions?: Maybe<Order_By>;
+  label?: Maybe<Order_By>;
   latitude?: Maybe<Order_By>;
   longitude?: Maybe<Order_By>;
   postal_code?: Maybe<Order_By>;
@@ -21151,6 +20174,7 @@ export type User_Addresses_Order_By = {
   instructions?: Maybe<Order_By>;
   is_outside?: Maybe<Order_By>;
   label?: Maybe<Order_By>;
+  label_enum?: Maybe<Order_By>;
   latitude?: Maybe<Order_By>;
   longitude?: Maybe<Order_By>;
   postal_code?: Maybe<Order_By>;
@@ -21184,6 +20208,8 @@ export enum User_Addresses_Select_Column {
   /** column name */
   Label = 'label',
   /** column name */
+  LabelEnum = 'label_enum',
+  /** column name */
   Latitude = 'latitude',
   /** column name */
   Longitude = 'longitude',
@@ -21205,7 +20231,8 @@ export type User_Addresses_Set_Input = {
   id?: Maybe<Scalars['uuid']>;
   instructions?: Maybe<Scalars['String']>;
   is_outside?: Maybe<Scalars['Boolean']>;
-  label?: Maybe<Address_Label_Enum>;
+  label?: Maybe<Scalars['String']>;
+  label_enum?: Maybe<Address_Label_Enum>;
   latitude?: Maybe<Scalars['float8']>;
   longitude?: Maybe<Scalars['float8']>;
   postal_code?: Maybe<Scalars['String']>;
@@ -21285,6 +20312,8 @@ export enum User_Addresses_Update_Column {
   IsOutside = 'is_outside',
   /** column name */
   Label = 'label',
+  /** column name */
+  LabelEnum = 'label_enum',
   /** column name */
   Latitude = 'latitude',
   /** column name */
@@ -23154,13 +22183,13 @@ export type Warehouse_Category_Variance_Order_By = {
 /** columns and relationships of "warehouse_hours" */
 export type Warehouse_Hours = {
   __typename?: 'warehouse_hours';
-  close_time_minutes: Scalars['Int'];
+  close_time_minutes?: Maybe<Scalars['Int']>;
   created_at: Scalars['timestamptz'];
-  day: Scalars['Int'];
+  day?: Maybe<Scalars['Int']>;
   id: Scalars['uuid'];
-  open_time_minutes: Scalars['Int'];
+  open_time_minutes?: Maybe<Scalars['Int']>;
   updated_at: Scalars['timestamptz'];
-  warehouse_id: Scalars['uuid'];
+  warehouse_id?: Maybe<Scalars['uuid']>;
 };
 
 /** aggregated selection of "warehouse_hours" */
@@ -24061,7 +23090,7 @@ export type Warehouses = {
   address_line_1?: Maybe<Scalars['String']>;
   address_line_2?: Maybe<Scalars['String']>;
   area?: Maybe<Scalars['geometry']>;
-  average_delivery_delay_minutes: Scalars['Int'];
+  average_delivery_delay_minutes?: Maybe<Scalars['Int']>;
   /** A computed field, executes function "average_global_time_seconds" */
   average_global_time_seconds?: Maybe<Scalars['float8']>;
   /** A computed field, executes function "average_preparation_time_second" */

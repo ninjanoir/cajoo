@@ -1,8 +1,14 @@
+import {useState} from "react"
+
 import { Card, Typography } from "@mui/material"
+import {GetUserWithOrdersQuery} from "./../generated/graphql"
 
-import { totalNumberOfOrders, totalAmount } from "./../helpers"
+import { totalNumberOfOrders, totalAmount } from "./../helpers/Counter"
 
-function CardUser({ data }: any) {
+
+function CardUser(data : GetUserWithOrdersQuery) {
+
+
   return (
     <Card>
       <Typography variant="h2" gutterBottom component="div">
