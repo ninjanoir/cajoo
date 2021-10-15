@@ -1,20 +1,10 @@
-import {useState} from "react"
 
 import { Card, Typography } from "@mui/material"
-import {GetUserWithOrdersQuery} from "./../generated/graphql"
+import { GetUserWithOrdersQuery } from "./../generated/graphql"
 
-import { totalNumberOfOrders, totalAmount } from "./../helpers/Counter"
+import { totalNumberOfOrders, totalAmount, oav } from "./../helpers/Counter"
 
-
-function CardUser(data : GetUserWithOrdersQuery) {
-
-  // const test = totalNumberOfOrders(data)
-
-  // console.log("----",test)
-
-
-
-
+function CardUser(data: GetUserWithOrdersQuery) {
   return (
     <Card>
       <Typography variant="h5" gutterBottom component="div">
@@ -22,13 +12,16 @@ function CardUser(data : GetUserWithOrdersQuery) {
       </Typography>
 
       <Typography variant="subtitle2">
-         Nombre de commande réalisé: {totalNumberOfOrders(data)}
+        Nombre de commande réalisé: {totalNumberOfOrders(data)}
       </Typography>
 
       <Typography variant="subtitle2">
-         Montant dépensé: {totalAmount(data)} euros
+        Montant total dépensé: {totalAmount(data)} euros
       </Typography>
 
+      <Typography variant="subtitle2">
+        Dépense moyenne par panier: {oav(data)} euros
+      </Typography>
     </Card>
   )
 }
