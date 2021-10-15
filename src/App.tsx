@@ -1,13 +1,16 @@
-import React from 'react';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import { useQuery } from '@apollo/client';
-import { CircularProgress, Typography } from '@mui/material';
+import React from "react"
+import Container from "@mui/material/Container"
+import Box from "@mui/material/Box"
+import { useQuery } from "@apollo/client"
+import { CircularProgress } from "@mui/material"
+
 import {
   GetUserWithOrdersQuery,
   GetUserWithOrdersQueryVariables,
   GetUserWithOrdersDocument,
-} from './generated/graphql';
+} from "./generated/graphql"
+
+import CardUser from "./components/Card"
 
 function App() {
   const { loading, data } = useQuery<
@@ -15,23 +18,25 @@ function App() {
     GetUserWithOrdersQueryVariables
   >(GetUserWithOrdersDocument, {
     variables: {
-      id: '87ff5d34-845d-4dfb-8de8-ec487455d9c6',
+      id: "c9b2663d-f545-4628-85ac-95e665136f44",
     },
-  });
+  })
+
+  console.log(data)
 
   return (
-    <Container maxWidth='sm'>
-      <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+    <Container maxWidth="sm">
+      <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
         {loading ? (
           <CircularProgress />
         ) : (
-          <Typography variant='h2' gutterBottom component='div'>
-            {`${data?.users_by_pk?.first_name} ${data?.users_by_pk?.last_name}`}
-          </Typography>
+          <>
+            <CardUser data={data} />
+          </>
         )}
       </Box>
     </Container>
-  );
+  )
 }
 
-export default App;
+export default App
