@@ -1,14 +1,17 @@
 export const totalNumberOfOrders = (data: any) => {
-  return data.length
+  return data.users_by_pk.orders.length
 }
 
 export const totalAmount = (data: any): number => {
+
   let total = 0
 
-  data.orders.forEach((order: { order_items: [] }) => {
-    return order.order_items.reduce(function (total, current: any) {
+  data.users_by_pk.orders.forEach((order: { order_items: [] }) => {
+    total = order.order_items.reduce(function (total, current: any) {
       return (total += current.ttc_price)
     }, 0)
+
+
   })
 
   return total
